@@ -1,7 +1,7 @@
 ---
 
 location: hacrafu-barbine
-location_nice: "Dorfanger, Petershagen"
+location_nice: "Dorfstraße 67, 15370 Petershagen"
 latitude: 52.523779038455814
 longitude: 13.770131171210881
 contact_name: 'Hacken Craften Funken e.V.'
@@ -10,23 +10,45 @@ contacts:
   - 'freifunk@hacrafu.de'
 
 hosts:
+
   - hostname: hacrafu-barbine-core
     role: corerouter
     model: "tplink_tl-wdr4900-v1"
     wireless_profile: freifunk_hacrafu
 
 ipv6_prefix: "2001:bf7:850:1800::/56"
-# dhcp		10.31.196.160/27
-# mesh5		10.31.24.39/32
-# mesh2		10.31.26.242/32
-# MGMT    10.31.26.243/32
+# dhcp    10.31.196.160/27
+# mesh5   10.31.26.242/32
+# mesh2   10.31.26.243/32
+# MGMT    10.31.24.39/32
 
 # use if dhcp adr are used for mgmt
 # Disable noping
 # dhcp_no_ping: false
 
 networks:
-  # DHCP with filtering and isolation
+
+  # MESH - 5 GHz 802.11s
+  - vid: 20
+    role: mesh
+    name: mesh_5g
+    prefix: 10.31.26.242/32
+    ipv6_subprefix: -20
+    mesh_ap: hacrafu-barbine-core
+    mesh_radio: 11a_standard
+    mesh_iface: mesh
+
+  # MESH - 2.4 GHz 802.11s
+  - vid: 21
+    role: mesh
+    name: mesh_2g
+    prefix: 10.31.26.243/32
+    ipv6_subprefix: -21
+    mesh_ap: hacrafu-barbine-core
+    mesh_radio: 11g_standard
+    mesh_iface: mesh
+
+  # DHCP
   - vid: 40
     role: dhcp
     untagged: true
@@ -37,35 +59,14 @@ networks:
     assignments:
       hacrafu-barbine-core: 1
 
-  # MESH - 5 GHz 802.11s
-  - vid: 20
-    role: mesh
-    name: mesh_5g
-    prefix: 10.31.24.39/32
-    ipv6_subprefix: -20
-    mesh_ap: hacrafu-barbine-core
-    mesh_radio: 11a_standard
-    mesh_iface: mesh
-
-  # MESH - 2.4 GHz 802.11s
-  - vid: 21
-    role: mesh
-    name: mesh_2g
-    prefix: 10.31.26.242/32
-    ipv6_subprefix: -21
-    mesh_ap: hacrafu-barbine-core
-    mesh_radio: 11g_standard
-    mesh_iface: mesh
-
   # MGMT                      # create a management vlan in which we can reach every device on this site for maintenance
   - vid: 42
     role: mgmt
-    prefix: 10.31.26.243/32
+    prefix: 10.31.24.39/32
     gateway: 1
     dns: 1
     ipv6_subprefix: 1
     assignments:
-      # 10.31.202.95
       hacrafu-barbine-core: 1
 
 # only place this ssh-keys
