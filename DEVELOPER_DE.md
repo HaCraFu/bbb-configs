@@ -1,42 +1,54 @@
 # Developer Guide
 
-This guide explains the directory structure of the project and variables within the config files.
+Dieser Guide erklärt die Ordnerstruktur des BBB-Projektes und die Variablen in den Konfigurationsdateien.
 
 ## locations/
 
-`locations/` holds all the location specific configuration. To create a new location add a new file named  `$LOCATIONNAME.yml`. The name should only contain `a-z`, `0-9` and `-`.
+Im Ordner `locations/` sind die Konfigurationen für alle Standorte abgelegt. Um einen neuen Standort anzulegen muss eine Datei mit dem Muster `standort-name.yml` angelegt werden. Der Name sollte nur die Zeichen `a-z`, `0-9` und `-` enthalten.
 
 As this format is new there are still some old locationdata you can find at `groups_vars/` and `host_vars/`. These old configurations work the same way exept being spilt into different files. For new locations only use `locations/`.
 
-There are default values defined in `group_vars/all/`. You can override the variables by redefining them in the `$LOCATIONNAME.yml`.
+Die Standart-Werte sind definiert in `group_vars/all/`. In deiner Standortdatei `standort-name.yml` kannst du diese Werte überschreiben.
 
 The following chapters describes the individual parts of the configuration file.
 
 ### Standort Name
 
 Dieser Name muss identisch zum Dateinamen und den individuellen Gerätenamen sein.
-This name has to be consistent with the filename and the prefix for individual devices.
 
-Bsp.:
+Für einen einzelnen Standortnamen:
+
+```
 Standortname: magda
 Dateiname:    magda.yml
 Gerätenamen:  magda-core, magda-ap-remise, magda-ap1, ...
+```
+
+Für mehrteilige Standortnamen:
+
+```
+Standortname: cafe-wostok
+Dateiname:    cafe-wostok.yml
+Gerätenamen:  cafe-wostok-core, cafe-wostok-ap1
+```
+
+In der Konfig sieht der Eintrag zum Standortnamen dann so aus:
 
 ```yml
 ---
 
-location: magda # a string with the name of the location
+location: magda # Standortname
 ```
 ### Allgemeine Standort-Informationen
 
 This part defines general values that are used e.g. in [Hopglass](https://hopglass.berlin.freifunk.net) and [OpenWifiMap](https://openwifimap.net).
 
 ```yml
-location_nice: roof top, Street 42, 10573 Berlin  # any string that describes your location. It should contain an address.
+location_nice: roof top, Street 42, 10573 Berlin  # Positionsbeschreibung des Standorts. Sollte die Adresse beinhalten.
 latitude: 52.484948320
 longitude: 13.443380903
-altitude: 42                                      # in meter above sea level
-height: 13                                        # in meter above ground level
+altitude: 42                                      # Meter über See
+height: 13                                        # Meter über Boden
 ```
 
 ### Kontakt Details
@@ -46,19 +58,19 @@ Please mind that a contact is mandatory. If you don't like to give your email ad
 ```yml
 contact_name: 'Petrosilius Quaccus'
 contact_nickname: 'Petro'
-# contacts must be a list. Even if only one contact is given
+# Kontakte müssen als Liste formatiert werden. Auch wenn nur ein einzelner Kontakt angegeben wird
 contacts:
   - 'quaccus@example.com'
   - 'https://config.berlin.freifunk.net/contact/446x/ImZmZnctZV0LTA0Ig.FFbQ8w._ZCA4hFY3zR8MdDVNrv3okqwPU'
 ```
 ### hosts
 
-This section describes every OpenWrt-device.
+Diese Teil beschreibt jedes OpenWrt-Gerät
 
 ```yml
 hosts:
-  - hostname: magda-core               # the name of the device. The location-part of the name must match `location:` defined above
-    role: corerouter                   # devices role. Could either be 'corerouter', 'ap' or 'gateway'
+  - hostname: magda-core               # Der Gerätename. Der Standortname muss Teil des Gerätenames sein
+    role: corerouter                   # Rolle des Gerätes. Could either be 'corerouter', 'ap' or 'gateway'
     model: "avm_fritzbox-7530"         # model name like written in the corresponding file name in group_vars/
     wireless_profile: freifunk_default # activates wifi with freifunk-default-settings on this device. By default only APs have activated wifi.
 ```
