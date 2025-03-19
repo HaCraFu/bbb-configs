@@ -53,7 +53,7 @@ networks:
   - vid: 40
     role: dhcp
     untagged: false
-    inbound_filtering: false
+    inbound_filtering: true
     enforce_client_isolation: false
     prefix: 10.31.205.0/27
     ipv6_subprefix: 0
@@ -74,6 +74,7 @@ networks:
   - vid: 50
     role: uplink
     untagged: true
+    ifname: lan
 
   - role: tunnel
     ifname: ts_wg0
