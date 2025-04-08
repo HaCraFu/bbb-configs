@@ -71,11 +71,11 @@ networks:
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  hacrafu-girandole-core: 36-40
+  hacrafu-girandole-core: 36-80
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  hacrafu-girandole-core: 13-20
+  hacrafu-girandole-core: 13-40
 
 # only place this ssh-keys
 ssh_keys:

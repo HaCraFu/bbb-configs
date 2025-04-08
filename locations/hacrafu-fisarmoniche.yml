@@ -70,11 +70,11 @@ networks:
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  hacrafu-fisarmoniche-core: 36-40
+  hacrafu-fisarmoniche-core: 36-80
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  hacrafu-fisarmoniche-core: 13-20
+  hacrafu-fisarmoniche-core: 13-40
 
 # only place this ssh-keys
 ssh_keys:
