@@ -1,9 +1,9 @@
 ---
 
-location: hacrafu-pici
+location: hacrafu-farfalloni
 location_nice: SEP, 15344 Strausberg
-latitude: 52.53921071003077
-longitude: 13.839110434779638
+latitude: 52.538729233662536
+longitude: 13.838737794683906
 contact_name: "Hacken Craften Funken e.V."
 contact_nickname: "HaCraFu e.V."
 contacts:
@@ -11,23 +11,16 @@ contacts:
 
 hosts:
 
-  - hostname: hacrafu-pici
+  - hostname: hacrafu-farfalloni
     role: corerouter
-    model: "cudy_ap3000outdoor-v1"
+    model: "glinet_gl-mt3000"
     wireless_profile: freifunk_hacrafu
 
-  - hostname: hacrafu-pici-ap
-    role: ap
-    model: "mikrotik_sxtsq-5-ac"
-    wireless_profile: mesh_only
-    mac_override:
-      eth0: 78:9A:18:87:C2:61
+ipv6_prefix: "2001:bf7:850:900::/56"
 
-ipv6_prefix: "2001:bf7:850:1e00::/56"
-
-# dhcp    10.248.43.0/24
-# mesh    10.248.42.40/30
-# mgmt    10.248.42.44/30
+# dhcp    10.31.255.160/27
+# mesh    10.31.124.221/31
+# mgmt    10.31.119.21/32
 
 networks:
 
@@ -35,9 +28,9 @@ networks:
   - vid: 20
     role: mesh
     name: mesh_5g
-    prefix: 10.248.42.40/32
+    prefix: 10.31.124.221/32
     ipv6_subprefix: -20
-    mesh_ap: hacrafu-pici
+    mesh_ap: hacrafu-farfalloni
     mesh_radio: 11a_standard
     mesh_iface: mesh
 
@@ -45,20 +38,10 @@ networks:
   - vid: 21
     role: mesh
     name: mesh_2g
-    prefix: 10.248.42.41/32
+    prefix: 10.31.124.222/32
     ipv6_subprefix: -21
-    mesh_ap: hacrafu-pici
+    mesh_ap: hacrafu-farfalloni
     mesh_radio: 11g_standard
-    mesh_iface: mesh
-
-  # MESH - 5 GHz 802.11s - AP
-  - vid: 22
-    role: mesh
-    name: mesh_5g_ap
-    prefix: 10.248.42.42/32
-    ipv6_subprefix: -22
-    mesh_ap: hacrafu-pici-ap
-    mesh_radio: 11a_standard
     mesh_iface: mesh
 
   # DHCP
@@ -66,30 +49,28 @@ networks:
     role: dhcp
     inbound_filtering: true
     enforce_client_isolation: true
-    prefix: 10.248.43.0/24
+    prefix: 10.31.255.160/27
     ipv6_subprefix: 0
     assignments:
-      hacrafu-pici: 1
+      hacrafu-farfalloni: 1
 
   # MGMT
   - vid: 42
     role: mgmt
-    prefix: 10.248.42.44/30
+    prefix: 10.31.119.21/32
     gateway: 1
     dns: 1
     ipv6_subprefix: 1
     assignments:
-      hacrafu-pici: 1     # 10.248.42.45
-      hacrafu-pici-ap: 2  # 10.248.42.46
+      hacrafu-farfalloni: 1
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  hacrafu-pici: 36-40
-  hacrafu-pici-ap: 44-36
+  hacrafu-farfalloni: 36-40
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  hacrafu-pici: 13-40
+  hacrafu-farfalloni: 13-40
 
 # only place this ssh-keys
 ssh_keys:
