@@ -10,7 +10,7 @@ contacts:
   - "freifunk@hacrafu.de"
 
 hosts:
-  - hostname: hacrafu-fiocchi-core
+  - hostname: hacrafu-fiocchi
     role: corerouter
     model: "dlink_covr-x1860-a1"
     wireless_profile: freifunk_hacrafu
@@ -18,12 +18,8 @@ hosts:
 
 ipv6_prefix: "2001:bf7:850:b00::/56"
 # dhcp    10.31.204.0/27
-# mesh5   10.31.203.224/32
-# mesh2   10.31.203.225/32
+# mesh    10.31.203.224/31
 # MGMT    10.31.202.95/32
-
-# Disable noping
-# dhcp_no_ping: false
 
 networks:
   # MESH - 5 GHz 802.11s
@@ -32,7 +28,7 @@ networks:
     name: mesh_5g
     prefix: 10.31.203.224/32
     ipv6_subprefix: -20
-    mesh_ap: hacrafu-fiocchi-core
+    mesh_ap: hacrafu-fiocchi
     mesh_radio: 11a_standard
     mesh_iface: mesh
 
@@ -42,20 +38,19 @@ networks:
     name: mesh_2g
     prefix: 10.31.203.225/32
     ipv6_subprefix: -21
-    mesh_ap: hacrafu-fiocchi-core
+    mesh_ap: hacrafu-fiocchi
     mesh_radio: 11g_standard
     mesh_iface: mesh
 
   # DHCP
   - vid: 40
     role: dhcp
-    untagged: true
-    inbound_filtering: false
-    enforce_client_isolation: false
+    inbound_filtering: true
+    enforce_client_isolation: true
     prefix: 10.31.204.0/27
     ipv6_subprefix: 0
     assignments:
-      hacrafu-fiocchi-core: 1
+      hacrafu-fiocchi: 1
 
   # MGMT
   - vid: 42
@@ -65,15 +60,15 @@ networks:
     dns: 1
     ipv6_subprefix: 1
     assignments:
-      hacrafu-fiocchi-core: 1
+      hacrafu-fiocchi: 1
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  hacrafu-fiocchi-core: 36-40
+  hacrafu-fiocchi: 36-80
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  hacrafu-fiocchi-core: 13-20
+  hacrafu-fiocchi: 13-40
 
 # only place this ssh-keys
 ssh_keys:
@@ -81,3 +76,5 @@ ssh_keys:
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICIpPZouLOf+1WT9ylMa/9mX1dhLTy8W07Q8G5w7KKNz freifunk@hacrafu.de
   - comment: Bob
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHrBKcGS+pyrN4MvRNqg7TPA2EsJ0cDCYLjrDRlTO6k HaCraFu bob@bobgoehler.de
+  - comment: Peter
+    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFIzevq2nqgb0rBAEEcDEkAIu24aTiWIkem3+59a6h10 HaCraFu Petersilie
