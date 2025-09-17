@@ -8,6 +8,7 @@ contact_name: "Hacken Craften Funken e.V."
 contact_nickname: "HaCraFu e.V."
 contacts:
   - "freifunk@hacrafu.de"
+  - "https://hacrafu.de/freifunk"
 
 hosts:
 
@@ -15,7 +16,7 @@ hosts:
     role: corerouter
     model: "cudy_wr3000-v1"
     wireless_profile: freifunk_hacrafu
-    # wifi_roaming: true
+    flow_offload: hw
     host__rclocal__to_merge:
       - |
         uci set network.vlan_40.ports='lan1:t lan2:t lan3:u'
@@ -26,13 +27,18 @@ hosts:
     role: ap
     model: "dlink_dap-x1860-a1"
     wireless_profile: freifunk_hacrafu
-    # wifi_roaming: true
 
   - hostname: hacrafu-capelvenere-dungeon
     role: ap
     model: "genexis_pulse-ex400"
-    wireless_profile: freifunk_hacrafu
-    # wifi_roaming: true
+    wireless_profile: freifunk_hacrafu_ap_only
+
+  - hostname: hacrafu-capelvenere-range
+    role: ap
+    model: "mikrotik_sxtsq-5-ac"
+    wireless_profile: mesh_only
+    mac_override:
+      eth0: f4:1e:57:c9:ef:6c
 
 ipv6_prefix: "2001:bf7:850:3a00::/56"
 
@@ -104,6 +110,16 @@ networks:
     mesh_radio: 11g_standard
     mesh_iface: mesh
 
+  # MESH - 5 GHz 802.11s - range
+  - vid: 26
+    role: mesh
+    name: mesh_5g_rgn
+    prefix: 10.248.50.14/32
+    ipv6_subprefix: -26
+    mesh_ap: hacrafu-capelvenere-range
+    mesh_radio: 11a_standard
+    mesh_iface: mesh
+
   # DHCP
   - vid: 40
     role: dhcp
@@ -113,7 +129,7 @@ networks:
     ipv6_subprefix: 0
     assignments:
       hacrafu-capelvenere: 1  # 33
-      ffpi: 2                 # 34
+      ffpi: 2  # 34
 
   # MGMT
   - vid: 42
@@ -123,10 +139,11 @@ networks:
     dns: 1
     ipv6_subprefix: 1
     assignments:
-      hacrafu-capelvenere: 1      # 17
+      hacrafu-capelvenere: 1  # 17
       hacrafu-capelvenere-dap: 2  # 18
       hacrafu-capelvenere-dungeon: 3  # 19
-      ffpi: 4                     # 20
+      hacrafu-capelvenere-range: 4  # 20
+      ffpi: 5  # 21
 
   # UPLINK
   - vid: 50
@@ -149,6 +166,7 @@ location__channel_assignments_11a_standard__to_merge:
   hacrafu-capelvenere: 36-80
   hacrafu-capelvenere-dap: 36-80
   hacrafu-capelvenere-dungeon: 36-80
+  hacrafu-capelvenere-range: 36-80
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
@@ -156,7 +174,7 @@ location__channel_assignments_11g_standard__to_merge:
   hacrafu-capelvenere-dap: 13-40
   hacrafu-capelvenere-dungeon: 13-20
 
-# only place this ssh-keys
+# only place these ssh-keys
 ssh_keys:
   - comment: Tom
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICIpPZouLOf+1WT9ylMa/9mX1dhLTy8W07Q8G5w7KKNz freifunk@hacrafu.de
