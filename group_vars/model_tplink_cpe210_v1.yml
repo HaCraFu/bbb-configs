@@ -8,6 +8,9 @@ version_nice: v1
 # override port in host_vars if required
 int_port: eth1
 
+low_mem: true
+low_flash: true
+
 wireless_devices:
   - name: 11g_standard
     band: 2g
