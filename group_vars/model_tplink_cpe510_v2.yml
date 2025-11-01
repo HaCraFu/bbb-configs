@@ -6,6 +6,9 @@ version_nice: v2
 
 int_port: eth0
 
+low_mem: true
+low_flash: true
+
 wireless_devices:
   - name: 11a_standard
     band: 5g
