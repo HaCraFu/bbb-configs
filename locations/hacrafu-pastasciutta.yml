@@ -10,21 +10,24 @@ contacts:
   - "freifunk@hacrafu.de"
 
 hosts:
-
   - hostname: hacrafu-pastasciutta
     role: corerouter
     model: "cudy_wr3000-v1"
     wireless_profile: freifunk_hacrafu
+    host__rclocal__to_merge:
+      - |
+        uci set network.vlan_40.ports='wan:t lan1:u lan2:u lan3:u'
+        uci set network.vlan_50.ports='wan:u'
+        uci commit network; reload_config
 
 ipv6_prefix: "2001:bf7:850:1a00::/56"
 
-# dhcp      10.248.55.128/27
-# mesh      10.31.247.252/31
+# DHCP      10.248.55.128/27
+# MESH      10.31.247.252/31
 # MGMT      10.31.244.213/32
 # TUNNEL    10.31.247.254/31
 
 networks:
-
   # MESH - 5 GHz 802.11s
   - vid: 20
     role: mesh
@@ -69,8 +72,6 @@ networks:
   # UPLINK
   - vid: 50
     role: uplink
-    ifname: wan
-    untagged: true
 
   - role: tunnel
     ifname: ts_wg0
