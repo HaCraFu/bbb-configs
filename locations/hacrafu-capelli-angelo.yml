@@ -27,7 +27,7 @@ ipv6_prefix: "2001:bf7:850:5000::/56"
 # TUNNEL  10.248.86.252/31
 
 networks:
-   # MESH - 5 GHz 802.11s
+  # MESH - 5 GHz 802.11s
   - vid: 20
     role: mesh
     name: mesh_5g
@@ -94,8 +94,6 @@ networks:
       capelli-angelo: 1 # 10.248.86.249
       capelli-angelo-ap: 2 # 10.248.86.250
 
-
-
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
   capelli-angelo: 52-80
@@ -114,4 +112,3 @@ ssh_keys:
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHrBKcGS+pyrN4MvRNqg7TPA2EsJ0cDCYLjrDRlTO6k HaCraFu bob@bobgoehler.de
   - comment: Peter
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFIzevq2nqgb0rBAEEcDEkAIu24aTiWIkem3+59a6h10 HaCraFu Petersilie
-
