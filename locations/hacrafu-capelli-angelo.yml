@@ -1,10 +1,7 @@
 ---
-# This ia a two router setup that intends massive throughput by channel separation one router 
-# for mesh one router for dhcp
 
 location: capelli-angelo
-# Musikschule Eggersdorf oder Am Markt über dem Försterpark
-location_nice: huckepack
+location_nice: 15345 Petershagen/Eggersdorf huckepack # Musikschule Eggersdorf oder Am Markt über dem Försterpark
 latitude:
 longitude:
 contact_nickname: "HaCraFu e.V."
@@ -16,6 +13,7 @@ hosts:
     role: corerouter
     model: "cudy_tr3000-v1"
     wireless_profile: freifunk_hacrafu_ap_only
+
   - hostname: capelli-angelo-ap
     role: ap
     model: "cudy_wr3000-v1"
@@ -27,10 +25,6 @@ ipv6_prefix: "2001:bf7:850:5000::/56"
 # MESH    10.248.86.244/30  
 # MGMT    10.248.86.248/30
 # TUNNEL  10.248.86.252/31
-#         2001:bf7:850:5000::/56
-
-# Disable noping
-# dhcp_no_ping: false
 
 networks:
    # MESH - 5 GHz 802.11s
@@ -65,7 +59,7 @@ networks:
     mesh_radio: 11a_standard
     mesh_iface: mesh
 
-  # MESH - AP - 2.4 GHz 802.11s -AP
+  # MESH - AP - 2.4 GHz 802.11s - AP
   - vid: 23
     role: mesh
     name: mesh_2g_ap
@@ -98,7 +92,7 @@ networks:
     ipv6_subprefix: 1
     assignments:
       capelli-angelo: 1 # 10.248.86.249
-      capelli-angelo-ap: # 10.248.86.250 
+      capelli-angelo-ap: 2 # 10.248.86.250 
 
 
 
@@ -112,22 +106,7 @@ location__channel_assignments_11g_standard__to_merge:
   capelli-angelo: 1-40
   capelli-angelo-ap: 13-40
 
-
-
-# DNS Servers
-#dns_servers:
-  ## quad9
- # - 9.9.9.9
-  #- 149.112.112.112
-  #- 2620:fe::fe
-  #- 2620:fe::9
-  ## cloudflare
-  #- 1.1.1.1
-  #- 1.0.0.1
-  #- 2606:4700:4700::1111
-  #- 2606:4700:4700::1001
-
-# SSH Keys
+# only place these ssh-keys
 ssh_keys:
   - comment: Tom
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICIpPZouLOf+1WT9ylMa/9mX1dhLTy8W07Q8G5w7KKNz freifunk@hacrafu.de
