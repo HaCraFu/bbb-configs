@@ -22,7 +22,7 @@ hosts:
 ipv6_prefix: "2001:bf7:850:5000::/56"
 
 # DHCP    10.248.88.128/26
-# MESH    10.248.86.244/30  
+# MESH    10.248.86.244/30
 # MGMT    10.248.86.248/30
 # TUNNEL  10.248.86.252/31
 
@@ -71,7 +71,7 @@ networks:
     mesh_radio: 11g_standard
     mesh_iface: mesh
 
- 
+
   # DHCP with filtering and isolation
   - vid: 40
     role: dhcp
@@ -92,7 +92,7 @@ networks:
     ipv6_subprefix: 1
     assignments:
       capelli-angelo: 1 # 10.248.86.249
-      capelli-angelo-ap: 2 # 10.248.86.250 
+      capelli-angelo-ap: 2 # 10.248.86.250
 
 
 
