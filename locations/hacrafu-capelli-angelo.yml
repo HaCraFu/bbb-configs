@@ -7,7 +7,7 @@ location: capelli-angelo
 location_nice: huckepack
 latitude:
 longitude:
-contact_nickname: "HaCraFu"
+contact_nickname: "HaCraFu e.V."
 contacts:
   - "freifunk@hacrafu.de"
 
@@ -15,11 +15,11 @@ hosts:
   - hostname: capelli-angelo
     role: corerouter
     model: "cudy_tr3000-v1"
-    wireless_profile: freifunk_hacrafu
+    wireless_profile: freifunk_hacrafu_ap_only
   - hostname: capelli-angelo-ap
     role: ap
     model: "cudy_wr3000-v1"
-    wireless_profile: freifunk_hacrafu
+    wireless_profile: mesh_only
 
 ipv6_prefix: "2001:bf7:850:5000::/56"
 
@@ -39,7 +39,7 @@ networks:
     name: mesh_5g
     prefix: 10.248.86.244/32
     ipv6_subprefix: -20
-    mesh_ap: capelli-angelo-core
+    mesh_ap: capelli-angelo
     mesh_radio: 11a_standard
     mesh_iface: mesh
 
@@ -47,29 +47,29 @@ networks:
   - vid: 21
     role: mesh
     name: mesh_2g
-    prefix: 10.248.86.244/32
+    prefix: 10.248.86.245/32
     ipv6_subprefix: -21
     # make mesh_metric for 2GHz worse than 5GHz
     mesh_metric_lqm: ["default 0.8"]
-    mesh_ap: capelli-angelo-core
+    mesh_ap: capelli-angelo
     mesh_radio: 11g_standard
     mesh_iface: mesh
 
-  # MESH - AP - 5 GHz 802.11s
+  # MESH - AP - 5 GHz 802.11s - AP
   - vid: 22
     role: mesh
     name: mesh_5g_ap
-    prefix: 10.31.215.36/32
+    prefix: 10.248.86.246/32
     ipv6_subprefix: -22
     mesh_ap: capelli-angelo-ap
     mesh_radio: 11a_standard
     mesh_iface: mesh
 
-  # MESH - AP - 2.4 GHz 802.11s
+  # MESH - AP - 2.4 GHz 802.11s -AP
   - vid: 23
     role: mesh
     name: mesh_2g_ap
-    prefix: 10.31.215.37/32
+    prefix: 10.248.86.247/32
     ipv6_subprefix: -23
     # make mesh_metric for 2GHz worse than 5GHz
     mesh_metric_lqm: ["default 0.8"]
@@ -83,93 +83,49 @@ networks:
     role: dhcp
     inbound_filtering: true
     enforce_client_isolation: true
-    prefix: 10.31.215.128/26
+    prefix: 10.248.88.128/26
     ipv6_subprefix: 0
     assignments:
-      noki-core: 1
+      capelli-angelo: 1
 
 
   # MGMT
   - vid: 42
     role: mgmt
-    prefix: 10.31.215.0/27
+    prefix: 10.248.86.248/30
     gateway: 1
     dns: 1
     ipv6_subprefix: 1
     assignments:
-      noki-core: 1 # 10.31.215.1
-      noki-ap: 2 # 10.31.215.2
+      capelli-angelo: 1 # 10.248.86.249
+      capelli-angelo-ap: # 10.248.86.250 
 
 
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  noki-core: 36-80
-  noki-ap: 36-80
+  capelli-angelo: 52-80
+  capelli-angelo-ap: 36-80
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  noki-core: 13-40
-  noki-ap: 13-40
+  capelli-angelo: 1-40
+  capelli-angelo-ap: 13-40
 
-# Wireless profile
-location__wireless_profiles__to_merge:
-  - name: noki
-    ifaces:
-      - mode: ap
-        ssid: berlin.freifunk.net
-        encryption: none
-        network: dhcp
-        radio: [11a_standard, 11g_standard]
-        ifname_hint: ff
-        owe_transition_ifname_hint: ffowe
 
-      - mode: ap
-        ssid: berlin.freifunk.net OWE
-        hidden: true
-        encryption: owe
-        network: dhcp
-        radio: [11a_standard, 11g_standard]
-        ifname_hint: ffowe
-        owe_transition_ifname_hint: ff
-        ieee80211w: 2
-
-      - mode: ap
-        ssid: noki
-        encryption: sae-mixed
-        key: "file:/root/wifi-pwd"
-        network: private
-        radio: [11a_standard, 11g_standard]
-        ifname_hint: pr
-
-      - mode: ap
-        ssid: noki-host
-        encryption: sae-mixed
-        key: "file:/root/wifi-pwd-host"
-        network: host
-        radio: [11a_standard, 11g_standard]
-        ifname_hint: ho
-
-      - mode: mesh
-        mesh_id: Mesh-Freifunk-Berlin
-        radio: [11a_standard, 11g_standard, 11a_mesh]
-        mcast_rate: 12000
-        mesh_fwding: 0
-        mesh_nolearn: 1
-        ifname_hint: mesh
 
 # DNS Servers
-dns_servers:
-  # quad9
-  - 9.9.9.9
-  - 149.112.112.112
-  - 2620:fe::fe
-  - 2620:fe::9
-  # cloudflare
-  - 1.1.1.1
-  - 1.0.0.1
-  - 2606:4700:4700::1111
-  - 2606:4700:4700::1001
+#dns_servers:
+  ## quad9
+ # - 9.9.9.9
+  #- 149.112.112.112
+  #- 2620:fe::fe
+  #- 2620:fe::9
+  ## cloudflare
+  #- 1.1.1.1
+  #- 1.0.0.1
+  #- 2606:4700:4700::1111
+  #- 2606:4700:4700::1001
 
 # SSH Keys
 ssh_keys:
@@ -177,3 +133,6 @@ ssh_keys:
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICIpPZouLOf+1WT9ylMa/9mX1dhLTy8W07Q8G5w7KKNz freifunk@hacrafu.de
   - comment: Bob
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHrBKcGS+pyrN4MvRNqg7TPA2EsJ0cDCYLjrDRlTO6k HaCraFu bob@bobgoehler.de
+  - comment: Peter
+    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFIzevq2nqgb0rBAEEcDEkAIu24aTiWIkem3+59a6h10 HaCraFu Petersilie
+
