@@ -1,9 +1,9 @@
 ---
 
 location: capelli-angelo
-location_nice: 15345 Petershagen/Eggersdorf huckepack # Musikschule Eggersdorf oder Am Markt über dem Försterpark
-latitude:
-longitude:
+location_nice: 15345 Petershagen/Eggersdorf # Musikschule Eggersdorf oder Am Markt über dem Försterpark
+# latitude: 52.53
+# longitude: 13.81
 contact_nickname: "HaCraFu e.V."
 contacts:
   - "freifunk@hacrafu.de"
@@ -71,8 +71,7 @@ networks:
     mesh_radio: 11g_standard
     mesh_iface: mesh
 
-
-  # DHCP with filtering and isolation
+  # DHCP
   - vid: 40
     role: dhcp
     inbound_filtering: true
@@ -81,7 +80,6 @@ networks:
     ipv6_subprefix: 0
     assignments:
       capelli-angelo: 1
-
 
   # MGMT
   - vid: 42
