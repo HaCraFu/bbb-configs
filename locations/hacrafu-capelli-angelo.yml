@@ -12,12 +12,22 @@ hosts:
   - hostname: capelli-angelo
     role: corerouter
     model: "cudy_tr3000-v1"
-    wireless_profile: freifunk_hacrafu_ap_only
+    # wireless_profile: freifunk_hacrafu_ap_only
+    wireless_profile: freifunk_hacrafu
+    host__rclocal__to_merge:
+      - |
+        uci set network.vlan_40.ports='wan:t lan:u'
+        uci commit network; reload_config
 
   - hostname: capelli-angelo-ap
     role: ap
     model: "cudy_wr3000-v1"
-    wireless_profile: mesh_only
+    # wireless_profile: mesh_only
+    wireless_profile: freifunk_hacrafu
+    host__rclocal__to_merge:
+      - |
+        uci set network.vlan_40.ports='wan:t lan1:t lan2:t lan3:u'
+        uci commit network; reload_config
 
 ipv6_prefix: "2001:bf7:850:5000::/56"
 
@@ -94,12 +104,14 @@ networks:
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  capelli-angelo: 52-80
+  # capelli-angelo: 52-80
+  capelli-angelo: 36-80
   capelli-angelo-ap: 36-80
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  capelli-angelo: 1-40
+  # capelli-angelo: 1-40
+  capelli-angelo: 13-40
   capelli-angelo-ap: 13-40
 
 # only place these ssh-keys
