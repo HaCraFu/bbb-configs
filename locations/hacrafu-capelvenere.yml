@@ -8,7 +8,6 @@ contact_name: "Hacken Craften Funken e.V."
 contact_nickname: "HaCraFu e.V."
 contacts:
   - "freifunk@hacrafu.de"
-  - "https://hacrafu.de/freifunk"
 
 hosts:
   - hostname: hacrafu-capelvenere
@@ -40,8 +39,8 @@ hosts:
 
 ipv6_prefix: "2001:bf7:850:3a00::/56"
 
-# dhcp      10.248.54.32/27
-# mesh      10.248.50.8/29
+# DHCP      10.248.54.32/27
+# MESH      10.248.50.8/29
 # MGMT      10.248.54.16/29
 # TUNNEL    10.248.50.2/31
 
@@ -121,7 +120,7 @@ networks:
   # DHCP
   - vid: 40
     role: dhcp
-    inbound_filtering: true
+    inbound_filtering: false
     enforce_client_isolation: false
     prefix: 10.248.54.32/27
     ipv6_subprefix: 0
@@ -142,6 +141,7 @@ networks:
       hacrafu-capelvenere-dungeon: 3  # 19
       hacrafu-capelvenere-range: 4  # 20
       ffpi: 5  # 21
+      tompi: 6  # 22
 
   # UPLINK
   - vid: 50
@@ -163,14 +163,14 @@ networks:
 location__channel_assignments_11a_standard__to_merge:
   hacrafu-capelvenere: 36-80
   hacrafu-capelvenere-dap: 36-80
-  hacrafu-capelvenere-dungeon: 36-80
+  hacrafu-capelvenere-dungeon: 52-80
   hacrafu-capelvenere-range: 36-80
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
   hacrafu-capelvenere: 13-40
   hacrafu-capelvenere-dap: 13-40
-  hacrafu-capelvenere-dungeon: 13-20
+  hacrafu-capelvenere-dungeon: 1-20
 
 # only place these ssh-keys
 ssh_keys:
