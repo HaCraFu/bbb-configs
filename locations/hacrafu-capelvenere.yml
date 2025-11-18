@@ -16,7 +16,7 @@ hosts:
     wireless_profile: freifunk_hacrafu
     host__rclocal__to_merge:
       - |
-        uci set network.vlan_40.ports='lan1:t lan2:t lan3:u'
+        uci set network.vlan_40.ports='wan:t lan1:t lan2:t lan3:u'
         uci set network.vlan_50.ports='wan:u'
         uci commit network; reload_config
 
@@ -127,6 +127,7 @@ networks:
     assignments:
       hacrafu-capelvenere: 1  # 33
       ffpi: 2  # 34
+      tompi: 3  # 35
 
   # MGMT
   - vid: 42
@@ -140,8 +141,6 @@ networks:
       hacrafu-capelvenere-dap: 2  # 18
       hacrafu-capelvenere-dungeon: 3  # 19
       hacrafu-capelvenere-range: 4  # 20
-      ffpi: 5  # 21
-      tompi: 6  # 22
 
   # UPLINK
   - vid: 50
