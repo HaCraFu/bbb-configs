@@ -16,7 +16,12 @@ hosts:
     wireless_profile: freifunk_hacrafu
     host__rclocal__to_merge:
       - |
-        uci set network.vlan_40.ports='wan:t lan:u'
+        uci set network.vlan_20.ports='eth0:t eth1:t'
+        uci set network.vlan_21.ports='eth0:t eth1:t'
+        uci set network.vlan_22.ports='eth0:t eth1:t'
+        uci set network.vlan_23.ports='eth0:t eth1:t'
+        uci set network.vlan_40.ports='eth0:t eth1:u'
+        uci set network.vlan_42.ports='eth0:t eth1:t'
         uci commit network; reload_config
 
   - hostname: hacrafu-capelli-angelo-ap
@@ -26,7 +31,7 @@ hosts:
     wireless_profile: freifunk_hacrafu
     host__rclocal__to_merge:
       - |
-        uci set network.vlan_40.ports='wan:t lan1:t lan2:t lan3:u'
+        uci set network.vlan_40.ports='wan:t lan1:u lan2:u lan3:u'
         uci commit network; reload_config
 
 ipv6_prefix: "2001:bf7:850:5000::/56"
