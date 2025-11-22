@@ -18,8 +18,6 @@ hosts:
       - |
         uci set network.vlan_22.ports='lan1:t lan2:t lan3:t'
         uci set network.vlan_23.ports='lan1:t lan2:t lan3:t'
-        uci set network.vlan_24.ports='lan1:t lan2:t lan3:t'
-        uci set network.vlan_25.ports='lan1:t lan2:t lan3:t'
         uci set network.vlan_26.ports='lan1:t lan2:t lan3:t'
         uci set network.vlan_40.ports='lan1:t lan2:t lan3:u'
         uci set network.vlan_42.ports='lan1:t lan2:t lan3:t'
@@ -94,24 +92,24 @@ networks:
     mesh_iface: mesh
 
   # MESH - 5 GHz 802.11s - dungeon
-  - vid: 24
-    role: mesh
-    name: mesh_5g_dgn
-    prefix: 10.248.50.12/32
-    ipv6_subprefix: -24
-    mesh_ap: hacrafu-capelvenere-dungeon
-    mesh_radio: 11a_standard
-    mesh_iface: mesh
+  # - vid: 24
+  #   role: mesh
+  #   name: mesh_5g_dgn
+  #   prefix: 10.248.50.12/32
+  #   ipv6_subprefix: -24
+  #   mesh_ap: hacrafu-capelvenere-dungeon
+  #   mesh_radio: 11a_standard
+  #   mesh_iface: mesh
 
   # MESH - 2.4 GHz 802.11s - dungeon
-  - vid: 25
-    role: mesh
-    name: mesh_2g_dgn
-    prefix: 10.248.50.13/32
-    ipv6_subprefix: -25
-    mesh_ap: hacrafu-capelvenere-dungeon
-    mesh_radio: 11g_standard
-    mesh_iface: mesh
+  # - vid: 25
+  #   role: mesh
+  #   name: mesh_2g_dgn
+  #   prefix: 10.248.50.13/32
+  #   ipv6_subprefix: -25
+  #   mesh_ap: hacrafu-capelvenere-dungeon
+  #   mesh_radio: 11g_standard
+  #   mesh_iface: mesh
 
   # MESH - 5 GHz 802.11s - range
   - vid: 26
