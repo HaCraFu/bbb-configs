@@ -36,10 +36,8 @@ hosts:
 
   - hostname: hacrafu-capelvenere-range
     role: ap
-    model: "mikrotik_sxtsq-5-ac"
-    wireless_profile: mesh_only
-    mac_override:
-      eth0: f4:1e:57:c9:ef:6c
+    model: "cudy_ap3000outdoor-v1"
+    wireless_profile: freifunk_hacrafu
 
 ipv6_prefix: "2001:bf7:850:3a00::/56"
 
@@ -91,35 +89,25 @@ networks:
     mesh_radio: 11g_standard
     mesh_iface: mesh
 
-  # MESH - 5 GHz 802.11s - dungeon
-  # - vid: 24
-  #   role: mesh
-  #   name: mesh_5g_dgn
-  #   prefix: 10.248.50.12/32
-  #   ipv6_subprefix: -24
-  #   mesh_ap: hacrafu-capelvenere-dungeon
-  #   mesh_radio: 11a_standard
-  #   mesh_iface: mesh
-
-  # MESH - 2.4 GHz 802.11s - dungeon
-  # - vid: 25
-  #   role: mesh
-  #   name: mesh_2g_dgn
-  #   prefix: 10.248.50.13/32
-  #   ipv6_subprefix: -25
-  #   mesh_metric_lqm: ['default 0.6']
-  #   mesh_ap: hacrafu-capelvenere-dungeon
-  #   mesh_radio: 11g_standard
-  #   mesh_iface: mesh
-
   # MESH - 5 GHz 802.11s - range
-  - vid: 26
+  - vid: 24
     role: mesh
     name: mesh_5g_rgn
-    prefix: 10.248.50.14/32
-    ipv6_subprefix: -26
+    prefix: 10.248.50.12/32
+    ipv6_subprefix: -24
     mesh_ap: hacrafu-capelvenere-range
     mesh_radio: 11a_standard
+    mesh_iface: mesh
+
+  # MESH - 2.4 GHz 802.11s - range
+  - vid: 25
+    role: mesh
+    name: mesh_2g_rgn
+    prefix: 10.248.50.13/32
+    ipv6_subprefix: -25
+    mesh_ap: hacrafu-capelvenere-range
+    mesh_metric_lqm: ['default 0.6']
+    mesh_radio: 11g_standard
     mesh_iface: mesh
 
   # DHCP
@@ -175,6 +163,7 @@ location__channel_assignments_11g_standard__to_merge:
   hacrafu-capelvenere: 13-40
   hacrafu-capelvenere-dap: 13-40
   hacrafu-capelvenere-dungeon: 1-20
+  hacrafu-capelvenere-range: 13-40
 
 # only place these ssh-keys
 ssh_keys:
