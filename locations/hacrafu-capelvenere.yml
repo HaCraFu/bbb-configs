@@ -30,19 +30,19 @@ hosts:
     role: ap
     model: "dlink_dap-x1860-a1"
     wireless_profile: freifunk_hacrafu
-    wifi_roaming: true
+    # wifi_roaming: true
 
   - hostname: hacrafu-capelvenere-range
     role: ap
     model: "cudy_ap3000outdoor-v1"
     wireless_profile: freifunk_hacrafu
-    wifi_roaming: true
+    # wifi_roaming: true
 
   - hostname: hacrafu-capelvenere-dungeon
     role: ap
     model: "genexis_pulse-ex400"
     wireless_profile: freifunk_hacrafu_ap_only
-    wifi_roaming: true
+    # wifi_roaming: true
 
 ipv6_prefix: "2001:bf7:850:3a00::/56"
 
