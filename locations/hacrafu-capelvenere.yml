@@ -25,6 +25,9 @@ hosts:
         uci set network.vlan_42.ports='lan1:t lan2:t lan3:t'
         uci set network.vlan_50.ports='wan:u'
         uci commit network; reload_config
+    host__packages__to_merge:
+      - "-mosh-server"
+      - "-tmux"
 
   - hostname: hacrafu-capelvenere-dap
     role: ap
@@ -68,7 +71,7 @@ networks:
     name: mesh_2g
     prefix: 10.248.50.9/32
     ipv6_subprefix: -21
-    mesh_metric_lqm: ['default 0.6']
+    mesh_metric_lqm: ['default 0.8']
     mesh_ap: hacrafu-capelvenere
     mesh_radio: 11g_standard
     mesh_iface: mesh
@@ -89,7 +92,7 @@ networks:
     name: mesh_2g_dap
     prefix: 10.248.50.11/32
     ipv6_subprefix: -23
-    mesh_metric_lqm: ['default 0.6']
+    mesh_metric_lqm: ['default 0.8']
     mesh_ap: hacrafu-capelvenere-dap
     mesh_radio: 11g_standard
     mesh_iface: mesh
@@ -111,7 +114,7 @@ networks:
     prefix: 10.248.50.13/32
     ipv6_subprefix: -25
     mesh_ap: hacrafu-capelvenere-range
-    mesh_metric_lqm: ['default 0.6']
+    mesh_metric_lqm: ['default 0.8']
     mesh_radio: 11g_standard
     mesh_iface: mesh
 
