@@ -1,9 +1,9 @@
 ---
 
 location: hacrafu-pennettine
-location_nice: Dorfstraße 54, 15370 Petershagen
-latitude: 52.52770503865818
-longitude: 13.785623257725566
+location_nice: Jugendclub Petershagen, Elbestraße 1, 15370 Petershagen
+latitude: 52.527672402721265
+longitude: 13.785601800053747
 contact_name: "Hacken Craften Funken e.V."
 contact_nickname: "HaCraFu e.V."
 contacts:
@@ -15,11 +15,10 @@ hosts:
     role: corerouter
     model: "cudy_wr3000-v1"
     wireless_profile: freifunk_hacrafu
-    openwrt_version: 24.10-SNAPSHOT
     host__rclocal__to_merge:
       - |
-        uci set network.vlan_50.ports='wan' # uplink
-        uci set network.vlan_40.ports='lan1 lan2 lan3' # dhcp
+        uci set network.vlan_40.ports='lan1 lan2 lan3'
+        uci set network.vlan_50.ports='wan'
         uci commit network; reload_config
 
 ipv6_prefix: "2001:bf7:850:2100::/56"
@@ -74,8 +73,6 @@ networks:
   # UPLINK
   - vid: 50
     role: uplink
-    # ifname: wan
-    # untagged: true
 
   - role: tunnel
     ifname: ts_wg0
