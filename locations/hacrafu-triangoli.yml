@@ -21,15 +21,15 @@ hosts:
         uci set network.vlan_40.ports='lan1:u lan2:u lan3:u' # dhcp
         uci commit network; reload_config
 
-  - hostname: hacrafu-triangoli-ap  # Trainstation AP (Strausberg Nord)
+  - hostname: hacrafu-triangoli-ap # AP for S-Bahnhof Nord, connected to lan2
     role: ap
     model: "cudy_ap3000outdoor-v1"
     wireless_profile: freifunk_hacrafu
 
 ipv6_prefix: "2001:bf7:850:3800::/56"
 
-# DHCP      10.248.68.0/24
-# MESH      10.248.47.152/30
+# dhcp      10.248.68.0/24
+# mesh      10.248.47.152/30
 # MGMT      10.248.47.156/30
 # TUNNEL    10.248.47.150/31
 
@@ -84,7 +84,6 @@ networks:
     ipv6_subprefix: 0
     assignments:
       hacrafu-triangoli: 1
-      radarcape: 2
 
   # MGMT
   - vid: 42
@@ -115,10 +114,12 @@ networks:
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
+  # hacrafu-triangoli: 36-80
   hacrafu-triangoli-ap: 36-80
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
+  # hacrafu-triangoli: 13-40
   hacrafu-triangoli-ap: 13-40
 
 # only place this ssh-keys
