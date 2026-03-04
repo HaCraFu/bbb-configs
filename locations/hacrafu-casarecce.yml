@@ -64,7 +64,7 @@ networks:
   # MESH - 5 GHz 802.11s - Left
   - vid: 22
     role: mesh
-    name: mesh_5g
+    name: mesh_5g_l
     prefix: 10.31.74.194/32
     ipv6_subprefix: -22
     mesh_ap: hacrafu-casarecce-left
@@ -74,7 +74,7 @@ networks:
   # MESH - 2.4 GHz 802.11s - Left
   - vid: 23
     role: mesh
-    name: mesh_2g
+    name: mesh_2g_l
     prefix: 10.31.74.195/32
     ipv6_subprefix: -23
     mesh_ap: hacrafu-casarecce-left
@@ -84,7 +84,7 @@ networks:
   # MESH - 5 GHz 802.11s - Right
   - vid: 24
     role: mesh
-    name: mesh_5g
+    name: mesh_5g_r
     prefix: 10.31.74.196/32
     ipv6_subprefix: -24
     mesh_ap: hacrafu-casarecce-right
@@ -94,7 +94,7 @@ networks:
   # MESH - 2.4 GHz 802.11s - Right
   - vid: 25
     role: mesh
-    name: mesh_2g
+    name: mesh_2g_r
     prefix: 10.31.74.197/32
     ipv6_subprefix: -25
     mesh_ap: hacrafu-casarecce-right
