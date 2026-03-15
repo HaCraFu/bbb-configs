@@ -24,7 +24,7 @@ ipv6_prefix: "2001:bf7:850:5800::/56"
 
 # DHCP    10.31.79.80/28
 # MESH    10.31.26.136/31
-# MGMT    10.31.28.56/31
+# MGMT    10.31.67.192/30
 # TUNNEL  10.31.29.4/31
 
 networks:
@@ -61,7 +61,7 @@ networks:
   # MGMT
   - vid: 42
     role: mgmt
-    prefix: 10.31.28.56/31
+    prefix: 10.31.67.192/30
     gateway: 1
     dns: 1
     ipv6_subprefix: 1
