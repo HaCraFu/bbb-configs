@@ -14,6 +14,10 @@ hosts:
     role: corerouter
     model: "dlink_dap-x1860-a1"
     wireless_profile: mesh_only
+    host__rclocal__to_merge:
+      - |
+        uci set network.vlan_40.ports='lan:u'
+        uci commit network; reload_config
 
   - hostname: hacrafu-cavalline-ap
     role: ap
