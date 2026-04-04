@@ -27,7 +27,7 @@ hosts:
         uci commit network; reload_config
     host__packages__to_merge:
       - "-mosh-server"
-      - "-tmux"
+      # - "-tmux"
 
   - hostname: hacrafu-capelvenere-dap
     role: ap
@@ -71,7 +71,7 @@ networks:
     name: mesh_2g
     prefix: 10.248.50.9/32
     ipv6_subprefix: -21
-    mesh_metric_lqm: ['default 0.8']
+    # mesh_metric_lqm: ['default 0.8']
     mesh_ap: hacrafu-capelvenere
     mesh_radio: 11g_standard
     mesh_iface: mesh
@@ -92,7 +92,7 @@ networks:
     name: mesh_2g_dap
     prefix: 10.248.50.11/32
     ipv6_subprefix: -23
-    mesh_metric_lqm: ['default 0.8']
+    # mesh_metric_lqm: ['default 0.8']
     mesh_ap: hacrafu-capelvenere-dap
     mesh_radio: 11g_standard
     mesh_iface: mesh
@@ -114,7 +114,7 @@ networks:
     prefix: 10.248.50.13/32
     ipv6_subprefix: -25
     mesh_ap: hacrafu-capelvenere-range
-    mesh_metric_lqm: ['default 0.8']
+    # mesh_metric_lqm: ['default 0.8']
     mesh_radio: 11g_standard
     mesh_iface: mesh
 
@@ -127,8 +127,9 @@ networks:
     ipv6_subprefix: 0
     assignments:
       hacrafu-capelvenere: 1  # 33
-      ffpi: 2  # 34
+      ffpi: 2   # 34
       tompi: 3  # 35
+      deb: 4    # 36
 
   # MGMT
   - vid: 42
