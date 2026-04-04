@@ -2,8 +2,8 @@
 
 location: hacrafu-anolini
 location_nice: Pferdestall Dorfplatz, 15370 Petershagen
-latitude: 52.522506
-longitude: 13.769707
+# latitude: 52.522506
+# longitude: 13.769707
 contact_name: "Hacken Craften Funken e.V."
 contact_nickname: "HaCraFu e.V."
 contacts:
@@ -40,7 +40,7 @@ networks:
     name: mesh_2g
     prefix: 10.31.238.227/32
     ipv6_subprefix: -21
-    mesh_metric_lqm: ['default 0.8']
+    # mesh_metric_lqm: ['default 0.8']
     mesh_ap: hacrafu-anolini
     mesh_radio: 11g_standard
     mesh_iface: mesh
