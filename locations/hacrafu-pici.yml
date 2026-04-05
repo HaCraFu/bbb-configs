@@ -84,11 +84,11 @@ networks:
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  hacrafu-pici: 36-80
+  hacrafu-pici: 36-40
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  hacrafu-pici: 13-40
+  hacrafu-pici: 13-20
 
 # only place this ssh-keys
 ssh_keys:
