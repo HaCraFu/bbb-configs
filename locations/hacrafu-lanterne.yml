@@ -16,7 +16,7 @@ hosts:
   - hostname: hacrafu-lanterne
     role: corerouter
     model: "glinet_gl-mt6000"
-    wireless_profile: disable
+    wireless_profile: freifunk_hacrafu
     flow_offload: hw
     host__rclocal__to_merge:
       - |
@@ -44,7 +44,7 @@ hosts:
   - hostname: hacrafu-lanterne-indoor
     role: ap
     model: "dlink_dap-x1860-a1" # TODO: replace with real model
-    wireless_profile: freifunk_hacrafu_ap_only
+    wireless_profile: freifunk_hacrafu
 
 snmp_devices:
   - hostname: hacrafu-lanterne-north
