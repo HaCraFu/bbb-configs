@@ -89,7 +89,7 @@ location__channel_assignments_11a_standard__to_merge:
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  hacrafu-cappellacci: 13-40
+  hacrafu-cappellacci: 9-20
 
 # only place these ssh-keys
 ssh_keys:
