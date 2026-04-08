@@ -16,7 +16,9 @@ hosts:
   - hostname: hacrafu-lanterne
     role: corerouter
     model: "glinet_gl-mt6000"
-    wireless_profile: freifunk_hacrafu_ap_only
+    wireless_profile: freifunk_hacrafu
+    openwrt_version: 25.12.2
+    openwrt_mirror: https://downloads.openwrt.org
     flow_offload: hw
     host__rclocal__to_merge:
       - |
@@ -253,16 +255,16 @@ networks:
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  # hacrafu-lanterne: 36-40
+  hacrafu-lanterne: 36-40
   hacrafu-lanterne-ap: 44-40
-  hacrafu-lanterne-mesh: 36-80
+  hacrafu-lanterne-mesh: 36-40
   hacrafu-lanterne-indoor: 44-40
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  # hacrafu-lanterne: 13-20
+  hacrafu-lanterne: 13-20
   hacrafu-lanterne-ap: 9-20
-  hacrafu-lanterne-mesh: 13-40
+  hacrafu-lanterne-mesh: 13-20
   hacrafu-lanterne-indoor: 9-20
 
 # only place this ssh-keys
