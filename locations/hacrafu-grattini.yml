@@ -65,11 +65,11 @@ networks:
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  hacrafu-grattini: 36-80
+  hacrafu-grattini: 44-40
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  hacrafu-grattini: 13-40
+  hacrafu-grattini: 9-20
 
 # only place this ssh-keys
 ssh_keys:
