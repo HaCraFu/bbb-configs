@@ -17,8 +17,8 @@ hosts:
     role: corerouter
     model: "glinet_gl-mt6000"
     wireless_profile: freifunk_hacrafu
-    openwrt_version: 25.12.2
-    openwrt_mirror: https://downloads.openwrt.org
+    # openwrt_version: 24.10.6
+    # openwrt_mirror: https://downloads.openwrt.org
     flow_offload: hw
     host__rclocal__to_merge:
       - |
@@ -130,24 +130,24 @@ networks:
     ipv6_subprefix: -13
 
   # MESH - 5 GHz 802.11s
-  - vid: 20
-    role: mesh
-    name: mesh_5g
-    prefix: 10.248.81.21/32
-    ipv6_subprefix: -20
-    mesh_ap: hacrafu-lanterne
-    mesh_radio: 11a_standard
-    mesh_iface: mesh
+  # - vid: 20
+  #   role: mesh
+  #   name: mesh_5g
+  #   prefix: 10.248.81.21/32
+  #   ipv6_subprefix: -20
+  #   mesh_ap: hacrafu-lanterne
+  #   mesh_radio: 11a_standard
+  #   mesh_iface: mesh
 
   # MESH - 2.4 GHz 802.11s
-  - vid: 21
-    role: mesh
-    name: mesh_2g
-    prefix: 10.248.81.22/32
-    ipv6_subprefix: -21
-    mesh_ap: hacrafu-lanterne
-    mesh_radio: 11g_standard
-    mesh_iface: mesh
+  # - vid: 21
+  #   role: mesh
+  #   name: mesh_2g
+  #   prefix: 10.248.81.22/32
+  #   ipv6_subprefix: -21
+  #   mesh_ap: hacrafu-lanterne
+  #   mesh_radio: 11g_standard
+  #   mesh_iface: mesh
 
   # MESH - 5 GHz 802.11s - ap dhcp
   - vid: 22
@@ -257,7 +257,7 @@ networks:
 location__channel_assignments_11a_standard__to_merge:
   # hacrafu-lanterne: 36-40 Enable after all falter neighors have been reconfigured to new channel and width
   # Does not work -> reboots constantly !!
-  # if buffered memory is 
+  # if buffered memory is
   # ~7.20 Mb -> Somethings wrong
   # ~42.4 Mb -> seems fine -> not random reboots
   # hacrafu-lanterne: 36-80
