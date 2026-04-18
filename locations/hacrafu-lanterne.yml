@@ -16,9 +16,9 @@ hosts:
   - hostname: hacrafu-lanterne
     role: corerouter
     model: "glinet_gl-mt6000"
-    wireless_profile: freifunk_hacrafu
-    # openwrt_version: 24.10.6
-    # openwrt_mirror: https://downloads.openwrt.org
+    wireless_profile: disable
+    openwrt_version: 24.10.6
+    openwrt_mirror: https://downloads.openwrt.org
     flow_offload: hw
     host__rclocal__to_merge:
       - |
