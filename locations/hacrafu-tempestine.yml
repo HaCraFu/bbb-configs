@@ -11,32 +11,33 @@ contacts:
 
 hosts:
 
-  - hostname: hacrafu-tempestine-core
+  - hostname: hacrafu-tempestine
     role: corerouter
     model: "cudy_wr3000h-v1"
     wireless_profile: freifunk_hacrafu
-    openwrt_version: snapshot
+    flow_offload: hw
+    host__rclocal__to_merge:
+      - |
+        uci set network.vlan_40.ports='lan1:u lan2:t lan3:t lan4:t'
+        uci set network.vlan_42.ports='lan1:t lan2:t lan3:t lan4:t'
+        uci set network.vlan_50.ports='wan:u'
+        uci commit network; reload_config
 
 ipv6_prefix: "2001:bf7:850:2e00::/56"
 
-# dhcp    10.248.40.224/27
-# mesh5   10.248.39.184/32
-# mesh2   10.248.39.185/32
+# DHCP    10.248.40.224/27
+# MESH    10.248.39.184/31
 # MGMT    10.248.39.181/32
 # TUNNEL  10.248.39.186/31
 
-# Disable noping
-# dhcp_no_ping: false
-
 networks:
-
   # MESH - 5 GHz 802.11s
   - vid: 20
     role: mesh
     name: mesh_5g
     prefix: 10.248.39.184/32
     ipv6_subprefix: -20
-    mesh_ap: hacrafu-tempestine-core
+    mesh_ap: hacrafu-tempestine
     mesh_radio: 11a_standard
     mesh_iface: mesh
 
@@ -46,20 +47,19 @@ networks:
     name: mesh_2g
     prefix: 10.248.39.185/32
     ipv6_subprefix: -21
-    mesh_ap: hacrafu-tempestine-core
+    mesh_ap: hacrafu-tempestine
     mesh_radio: 11g_standard
     mesh_iface: mesh
 
   # DHCP
   - vid: 40
     role: dhcp
-    untagged: false
-    inbound_filtering: false
-    enforce_client_isolation: false
+    inbound_filtering: true
+    enforce_client_isolation: true
     prefix: 10.248.40.224/27
     ipv6_subprefix: 0
     assignments:
-      hacrafu-tempestine-core: 1
+      hacrafu-tempestine: 1
 
   # MGMT
   - vid: 42
@@ -69,33 +69,31 @@ networks:
     dns: 1
     ipv6_subprefix: 1
     assignments:
-      hacrafu-tempestine-core: 1
+      hacrafu-tempestine: 1
 
   # UPLINK + TUNNEL
-  # - vid: 50
-  #   ifname: wan
-  #   role: uplink
-  #   untagged: true
+  - vid: 50
+    role: uplink
 
-  # - role: tunnel
-  #   ifname: ts_wg0
-  #   mtu: 1280
-  #   prefix: 10.248.39.186/32
-  #   wireguard_port: 51820
+  - role: tunnel
+    ifname: ts_wg0
+    mtu: 1280
+    prefix: 10.248.39.186/32
+    wireguard_port: 51820
 
-  # - role: tunnel
-  #   ifname: ts_wg1
-  #   mtu: 1280
-  #   prefix: 10.248.39.187/32
-  #   wireguard_port: 51821
+  - role: tunnel
+    ifname: ts_wg1
+    mtu: 1280
+    prefix: 10.248.39.187/32
+    wireguard_port: 51821
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  hacrafu-tempestine-core: 36-80
+  hacrafu-tempestine: 36-40
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  hacrafu-tempestine-core: 13-40
+  hacrafu-tempestine: 13-20
 
 # only place this ssh-keys
 ssh_keys:
@@ -103,3 +101,5 @@ ssh_keys:
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICIpPZouLOf+1WT9ylMa/9mX1dhLTy8W07Q8G5w7KKNz freifunk@hacrafu.de
   - comment: Bob
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHrBKcGS+pyrN4MvRNqg7TPA2EsJ0cDCYLjrDRlTO6k HaCraFu bob@bobgoehler.de
+  - comment: Peter
+    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFIzevq2nqgb0rBAEEcDEkAIu24aTiWIkem3+59a6h10 HaCraFu Petersilie
