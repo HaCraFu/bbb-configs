@@ -117,13 +117,13 @@ networks:
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  hacrafu-coniglietti: 52-80
-  hacrafu-coniglietti-ap: 36-80
+  hacrafu-coniglietti: 52-40
+  hacrafu-coniglietti-ap: 36-40
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  hacrafu-coniglietti: 1-40
-  hacrafu-coniglietti-ap: 13-40
+  hacrafu-coniglietti: 5-20
+  hacrafu-coniglietti-ap: 13-20
 
 # only place this ssh-keys
 ssh_keys:
