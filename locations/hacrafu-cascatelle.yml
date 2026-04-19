@@ -31,7 +31,7 @@ ipv6_prefix: "2001:bf7:850:2300::/56"
 snmp_devices:
   - hostname: hacrafu-cascatelle-nano
     address: 10.31.90.58
-    snmp_profile: airos_8
+    snmp_profile: airos_6
 
 networks:
   # MESH Nanostation
@@ -40,6 +40,7 @@ networks:
     name: mesh_nano
     prefix: 10.31.90.54/32
     ipv6_subprefix: -10
+    ptp: true
 
   # MESH - 5 GHz 802.11s
   - vid: 20
