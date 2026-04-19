@@ -1,7 +1,7 @@
 ---
 
 location: hacrafu-cascatelle
-location_nice: Petershagen/Eggersdorf
+location_nice: Ambulatorium, Karl-Liebknecht-Str. 35, 15345 Eggersdorf
 latitude: 52.53527
 longitude: 13.82261
 contact_name: "Hacken Craften Funken e.V."
@@ -10,29 +10,42 @@ contacts:
   - "freifunk@hacrafu.de"
 
 hosts:
-
   - hostname: hacrafu-cascatelle
     role: corerouter
     model: "cudy_wr3000h-v1"
     wireless_profile: freifunk_hacrafu
-    openwrt_version: snapshot
-    # host__rclocal__to_merge:
-    #   - |
-    #     # Enable legacy rates to enable meshing with neighbors
-    #     for radio in $(uci show wireless | grep "=wifi-device" | cut -d. -f2 | cut -d= -f1); do uci set wireless.$radio.legacy_rates='1'; done; uci commit wireless; reload_config
+    flow_offload: hw
+    host__rclocal__to_merge:
+      - |
+        uci set network.vlan_10.ports='lan1:t lan2:t lan3:t lan4:t'
+        uci set network.vlan_40.ports='lan1:u lan2:u lan3:u lan4:u wan:u'
+        uci set network.vlan_42.ports='lan1:t lan2:t lan3:t lan4:t'
+        uci commit network; reload_config
 
 ipv6_prefix: "2001:bf7:850:2300::/56"
-# dhcp    10.31.235.0/27
-# mesh    10.31.45.82/31
-# MGMT    10.31.45.81/32
+
+# DHCP    10.31.235.0/27
+# MESH    10.31.90.52/30
+# MGMT    10.31.90.56/30
+
+snmp_devices:
+  - hostname: hacrafu-cascatelle-nano
+    address: 10.31.90.58
+    snmp_profile: airos_8
 
 networks:
+  # MESH Nanostation
+  - vid: 10
+    role: mesh
+    name: mesh_nano
+    prefix: 10.31.90.54/32
+    ipv6_subprefix: -10
 
   # MESH - 5 GHz 802.11s
   - vid: 20
     role: mesh
     name: mesh_5g
-    prefix: 10.31.45.82/32
+    prefix: 10.31.90.52/32
     ipv6_subprefix: -20
     mesh_ap: hacrafu-cascatelle
     mesh_radio: 11a_standard
@@ -42,7 +55,7 @@ networks:
   - vid: 21
     role: mesh
     name: mesh_2g
-    prefix: 10.31.45.83/32
+    prefix: 10.31.90.53/32
     ipv6_subprefix: -21
     mesh_ap: hacrafu-cascatelle
     mesh_radio: 11g_standard
@@ -61,20 +74,21 @@ networks:
   # MGMT
   - vid: 42
     role: mgmt
-    prefix: 10.31.45.81/32
+    prefix: 10.31.90.56/30
     gateway: 1
     dns: 1
     ipv6_subprefix: 1
     assignments:
-      hacrafu-cascatelle: 1
+      hacrafu-cascatelle: 1  # 57
+      hacrafu-cascatelle-nano: 2  # 58
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  hacrafu-cascatelle: 36-80
+  hacrafu-cascatelle: 44-40
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  hacrafu-cascatelle: 13-40
+  hacrafu-cascatelle: 13-20
 
 # only place this ssh-keys
 ssh_keys:
