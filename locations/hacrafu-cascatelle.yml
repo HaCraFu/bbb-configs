@@ -34,7 +34,7 @@ snmp_devices:
     snmp_profile: airos_6
 
 networks:
-  # MESH Nanostation
+  # MESH NanoBeam M5 16
   - vid: 10
     role: mesh
     name: mesh_nano
