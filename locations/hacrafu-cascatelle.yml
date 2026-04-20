@@ -14,7 +14,6 @@ hosts:
     role: corerouter
     model: "cudy_wr3000h-v1"
     wireless_profile: freifunk_hacrafu
-    flow_offload: hw
     host__rclocal__to_merge:
       - |
         uci set network.vlan_10.ports='lan1:t lan2:t lan3:t lan4:t'
