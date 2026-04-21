@@ -19,7 +19,6 @@ hosts:
     wireless_profile: disable
     openwrt_version: 24.10.6
     openwrt_mirror: https://downloads.openwrt.org
-    flow_offload: hw
     host__rclocal__to_merge:
       - |
         uci set network.vlan_10.ports='lan2:t'
