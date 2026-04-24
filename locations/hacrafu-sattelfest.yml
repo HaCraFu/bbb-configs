@@ -1,0 +1,101 @@
+---
+
+location: hacrafu-sattelfest
+location_nice: SEP, 15344 Strausberg
+# latitude: 52.539196553
+# longitude: 13.839265108
+contact_name: "Hacken Craften Funken e.V."
+contact_nickname: "HaCraFu e.V."
+contacts:
+  - "freifunk@hacrafu.de"
+
+hosts:
+
+  - hostname: hacrafu-sattelfest
+    role: corerouter
+    model: "cudy_ap3000outdoor-v1"
+    wireless_profile: freifunk_hacrafu_ap_only
+
+  - hostname: hacrafu-sattelfest-ap
+    role: ap
+    model: "mikrotik_sxtsq-5-ac"
+    wireless_profile: mesh_only
+    mac_override:
+      eth0: 78:9a:18:87:c2:61
+
+ipv6_prefix: "2001:bf7:850:6100::/56"
+
+# DHCP    10.248.109.128/25
+# MESH    10.31.90.60/30
+# MGMT    10.31.97.76/30
+
+networks:
+
+  # MESH - 5 GHz 802.11s
+  - vid: 20
+    role: mesh
+    name: mesh_5g
+    prefix: 10.31.90.60/32
+    ipv6_subprefix: -20
+    mesh_ap: hacrafu-sattelfest
+    mesh_radio: 11a_standard
+    mesh_iface: mesh
+
+  # MESH - 2.4 GHz 802.11s
+  - vid: 21
+    role: mesh
+    name: mesh_2g
+    prefix: 10.31.90.61/32
+    ipv6_subprefix: -21
+    mesh_ap: hacrafu-sattelfest
+    mesh_radio: 11g_standard
+    mesh_iface: mesh
+
+  # MESH - 5 GHz 802.11s
+  - vid: 22
+    role: mesh
+    name: mesh_5g_ap
+    prefix: 10.31.90.62/32
+    ipv6_subprefix: -22
+    mesh_ap: hacrafu-sattelfest-ap
+    mesh_radio: 11a_standard
+    mesh_iface: mesh
+
+  # DHCP
+  - vid: 40
+    role: dhcp
+    inbound_filtering: true
+    enforce_client_isolation: true
+    prefix: 10.248.109.128/25
+    ipv6_subprefix: 0
+    assignments:
+      hacrafu-sattelfest: 1
+
+  # MGMT
+  - vid: 42
+    role: mgmt
+    prefix: 10.31.97.76/30
+    gateway: 1
+    dns: 1
+    ipv6_subprefix: 1
+    assignments:
+      hacrafu-sattelfest: 1     # 77
+      hacrafu-sattelfest-ap: 2  # 78
+
+# AP-id, wifi-channel, bandwidth, txpower
+location__channel_assignments_11a_standard__to_merge:
+  hacrafu-sattelfest: 100-40
+  hacrafu-sattelfest-ap: 36-80
+
+# AP-id, wifi-channel, bandwidth, txpower
+location__channel_assignments_11g_standard__to_merge:
+  hacrafu-sattelfest: 13-20
+
+# only place this ssh-keys
+ssh_keys:
+  - comment: Tom
+    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICIpPZouLOf+1WT9ylMa/9mX1dhLTy8W07Q8G5w7KKNz freifunk@hacrafu.de
+  - comment: Bob
+    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHrBKcGS+pyrN4MvRNqg7TPA2EsJ0cDCYLjrDRlTO6k HaCraFu bob@bobgoehler.de
+  - comment: Peter
+    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFIzevq2nqgb0rBAEEcDEkAIu24aTiWIkem3+59a6h10 HaCraFu Petersilie
