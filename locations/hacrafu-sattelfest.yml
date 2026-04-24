@@ -15,6 +15,10 @@ hosts:
     role: corerouter
     model: "cudy_ap3000outdoor-v1"
     wireless_profile: freifunk_hacrafu_ap_only
+    host__rclocal__to_merge:
+      - |
+        uci set network.vlan_40.ports='eth0:u'
+        uci commit network; reload_config
 
   - hostname: hacrafu-sattelfest-ap
     role: ap
