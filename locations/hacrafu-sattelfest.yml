@@ -2,8 +2,8 @@
 
 location: hacrafu-sattelfest
 location_nice: SEP, 15344 Strausberg
-# latitude: 52.539196553
-# longitude: 13.839265108
+latitude: 52.539196553
+longitude: 13.839265108
 contact_name: "Hacken Craften Funken e.V."
 contact_nickname: "HaCraFu e.V."
 contacts:
@@ -29,9 +29,11 @@ hosts:
 
 ipv6_prefix: "2001:bf7:850:6100::/56"
 
-# DHCP    10.248.109.128/25
-# MESH    10.31.90.60/30
-# MGMT    10.31.97.76/30
+# DHCP    10.248.109.128/25 // deleted after event
+# MESH    10.31.90.60/30    // deleted after event
+# MGMT    10.31.97.76/30    // deleted after event
+
+# Is/Was used in cinjunction with bucatini+ap
 
 networks:
 
