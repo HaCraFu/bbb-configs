@@ -13,7 +13,6 @@ hosts:
   - hostname: hacrafu-casoncelli
     role: corerouter
     model: "mikrotik_routerboard-750gr3"
-    wireless_profile: disable
     host__rclocal__to_merge:
       - |
         uci set network.vlan_10.ports='lan2:t lan3:t lan4:t lan5:t'
@@ -130,13 +129,11 @@ networks:
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  hacrafu-casoncelli: 36-40
-  hacrafu-casoncelli-ap: 44-40
+  hacrafu-casoncelli-ap: 36-40
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  hacrafu-casoncelli: 13-20
-  hacrafu-casoncelli-ap: 9-20
+  hacrafu-casoncelli-ap: 13-20
 
 # only place this ssh-keys
 ssh_keys:
