@@ -49,31 +49,11 @@ networks:
     ipv6_subprefix: -10
     ptp: true
 
-  # MESH - 5 GHz 802.11s
-  - vid: 20
-    role: mesh
-    name: mesh_5g
-    prefix: 10.31.98.144/32
-    ipv6_subprefix: -20
-    mesh_ap: hacrafu-casoncelli
-    mesh_radio: 11a_standard
-    mesh_iface: mesh
-
-  # MESH - 2.4 GHz 802.11s
-  - vid: 21
-    role: mesh
-    name: mesh_2g
-    prefix: 10.31.98.145/32
-    ipv6_subprefix: -21
-    mesh_ap: hacrafu-casoncelli
-    mesh_radio: 11g_standard
-    mesh_iface: mesh
-
   # MESH - 5 GHz 802.11s - AP
   - vid: 22
     role: mesh
     name: mesh_5g_ap
-    prefix: 10.31.98.146/32
+    prefix: 10.31.98.144/32
     ipv6_subprefix: -22
     mesh_ap: hacrafu-casoncelli-ap
     mesh_radio: 11a_standard
@@ -83,7 +63,7 @@ networks:
   - vid: 23
     role: mesh
     name: mesh_2g_ap
-    prefix: 10.31.98.147/32
+    prefix: 10.31.98.145/32
     ipv6_subprefix: -23
     mesh_ap: hacrafu-casoncelli-ap
     mesh_radio: 11g_standard
