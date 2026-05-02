@@ -14,7 +14,6 @@ hosts:
     role: corerouter
     model: "cudy_wr3000-v1"
     wireless_profile: freifunk_hacrafu
-    flow_offload: hw
     host__rclocal__to_merge:
       - |
         uci set network.vlan_22.ports='lan1:t lan2:t lan3:t'
@@ -25,9 +24,6 @@ hosts:
         uci set network.vlan_42.ports='lan1:t lan2:t lan3:t'
         uci set network.vlan_50.ports='wan:u'
         uci commit network; reload_config
-    host__packages__to_merge:
-      - "-mosh-server"
-      # - "-tmux"
 
   - hostname: hacrafu-capelvenere-dap
     role: ap
@@ -71,7 +67,6 @@ networks:
     name: mesh_2g
     prefix: 10.248.50.9/32
     ipv6_subprefix: -21
-    # mesh_metric_lqm: ['default 0.8']
     mesh_ap: hacrafu-capelvenere
     mesh_radio: 11g_standard
     mesh_iface: mesh
@@ -92,7 +87,6 @@ networks:
     name: mesh_2g_dap
     prefix: 10.248.50.11/32
     ipv6_subprefix: -23
-    # mesh_metric_lqm: ['default 0.8']
     mesh_ap: hacrafu-capelvenere-dap
     mesh_radio: 11g_standard
     mesh_iface: mesh
@@ -114,7 +108,6 @@ networks:
     prefix: 10.248.50.13/32
     ipv6_subprefix: -25
     mesh_ap: hacrafu-capelvenere-range
-    # mesh_metric_lqm: ['default 0.8']
     mesh_radio: 11g_standard
     mesh_iface: mesh
 
@@ -162,17 +155,17 @@ networks:
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  hacrafu-capelvenere: 36-80
-  hacrafu-capelvenere-dap: 36-80
-  hacrafu-capelvenere-range: 36-80
-  hacrafu-capelvenere-dungeon: 52-80
+  hacrafu-capelvenere: 36-40
+  hacrafu-capelvenere-dap: 36-40
+  hacrafu-capelvenere-range: 44-40
+  hacrafu-capelvenere-dungeon: 36-40
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  hacrafu-capelvenere: 13-40
-  hacrafu-capelvenere-dap: 13-40
-  hacrafu-capelvenere-range: 13-40
-  hacrafu-capelvenere-dungeon: 1-20
+  hacrafu-capelvenere: 13-20
+  hacrafu-capelvenere-dap: 13-20
+  hacrafu-capelvenere-range: 9-20
+  hacrafu-capelvenere-dungeon: 9-20
 
 # only place these ssh-keys
 ssh_keys:
