@@ -136,6 +136,8 @@ networks:
       hacrafu-capelvenere-dap: 2  # 18
       hacrafu-capelvenere-dungeon: 3  # 19
       hacrafu-capelvenere-range: 4  # 20
+      hacrafu-capelvenere-switch-fritz: 5  # 21
+      hacrafu-capelvenere-switch-roof: 6  # 22
 
   # UPLINK
   - vid: 50
