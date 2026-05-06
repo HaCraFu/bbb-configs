@@ -158,15 +158,15 @@ networks:
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
   hacrafu-capelvenere: 36-40
-  hacrafu-capelvenere-dap: 36-40
-  hacrafu-capelvenere-range: 44-40
-  hacrafu-capelvenere-dungeon: 36-40
+  hacrafu-capelvenere-dap: 44-40
+  hacrafu-capelvenere-range: 36-40
+  hacrafu-capelvenere-dungeon: 44-40
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
   hacrafu-capelvenere: 13-20
-  hacrafu-capelvenere-dap: 13-20
-  hacrafu-capelvenere-range: 9-20
+  hacrafu-capelvenere-dap: 9-20
+  hacrafu-capelvenere-range: 13-20
   hacrafu-capelvenere-dungeon: 9-20
 
 # only place these ssh-keys
