@@ -10,22 +10,45 @@ contacts:
   - "freifunk@hacrafu.de"
 
 hosts:
+  # - hostname: hacrafu-casoncelli
+  #   role: corerouter
+  #   model: "mikrotik_routerboard-750gr3"
+  #   host__rclocal__to_merge:
+  #     - |
+  #       uci set network.vlan_10.ports='lan2:t lan3:t lan4:t lan5:t'
+  #       uci set network.vlan_20.ports='lan2:t lan3:t lan4:t lan5:t'
+  #       uci set network.vlan_21.ports='lan2:t lan3:t lan4:t lan5:t'
+  #       uci set network.vlan_22.ports='lan2:t lan3:t lan4:t lan5:t'
+  #       uci set network.vlan_23.ports='lan2:t lan3:t lan4:t lan5:t'
+  #       uci set network.vlan_40.ports='lan2:t lan3:t lan4:t lan5:u'
+  #       uci set network.vlan_42.ports='lan2:t lan3:t lan4:t lan5:t'
+  #       uci set network.vlan_50.ports='wan:u'
+  #       uci commit network; reload_config
+
   - hostname: hacrafu-casoncelli
     role: corerouter
-    model: "mikrotik_routerboard-750gr3"
+    model: "cudy_wr3000-v1"
+    wireless_profile: freifunk_hacrafu
     host__rclocal__to_merge:
       - |
-        uci set network.vlan_10.ports='lan2:t lan3:t lan4:t lan5:t'
-        uci set network.vlan_22.ports='lan2:t lan3:t lan4:t lan5:t'
-        uci set network.vlan_23.ports='lan2:t lan3:t lan4:t lan5:t'
-        uci set network.vlan_40.ports='lan2:u lan3:u lan4:u lan5:u'
-        uci set network.vlan_42.ports='lan2:t lan3:t lan4:t lan5:t'
+        uci set network.vlan_10.ports='lan1:t lan2:t lan3:t'
+        uci set network.vlan_20.ports='lan1:t lan2:t lan3:t'
+        uci set network.vlan_21.ports='lan1:t lan2:t lan3:t'
+        uci set network.vlan_22.ports='lan1:t lan2:t lan3:t'
+        uci set network.vlan_23.ports='lan1:t lan2:t lan3:t'
+        uci set network.vlan_40.ports='lan1:t lan2:t lan3:u'
+        uci set network.vlan_42.ports='lan1:t lan2:t lan3:t'
         uci set network.vlan_50.ports='wan:u'
         uci commit network; reload_config
 
   - hostname: hacrafu-casoncelli-ap
     role: ap
     model: "cudy_ap3000outdoor-v1"
+    wireless_profile: freifunk_hacrafu
+
+  - hostname: hacrafu-casoncelli-snack
+    role: ap
+    model: "cudy_wr3000-v1"
     wireless_profile: freifunk_hacrafu
 
 ipv6_prefix: "2001:bf7:850:5d00::/56"
@@ -49,11 +72,31 @@ networks:
     ipv6_subprefix: -10
     ptp: true
 
+  # MESH - 5 GHz 802.11s
+  - vid: 20
+    role: mesh
+    name: mesh_5g
+    prefix: 10.31.98.144/32
+    ipv6_subprefix: -20
+    mesh_ap: hacrafu-casoncelli
+    mesh_radio: 11a_standard
+    mesh_iface: mesh
+
+  # MESH - 2.4 GHz 802.11s
+  - vid: 21
+    role: mesh
+    name: mesh_2g
+    prefix: 10.31.98.145/32
+    ipv6_subprefix: -21
+    mesh_ap: hacrafu-casoncelli
+    mesh_radio: 11g_standard
+    mesh_iface: mesh
+
   # MESH - 5 GHz 802.11s - AP
   - vid: 22
     role: mesh
     name: mesh_5g_ap
-    prefix: 10.31.98.144/32
+    prefix: 10.31.98.146/32
     ipv6_subprefix: -22
     mesh_ap: hacrafu-casoncelli-ap
     mesh_radio: 11a_standard
@@ -63,9 +106,29 @@ networks:
   - vid: 23
     role: mesh
     name: mesh_2g_ap
-    prefix: 10.31.98.145/32
+    prefix: 10.31.98.147/32
     ipv6_subprefix: -23
     mesh_ap: hacrafu-casoncelli-ap
+    mesh_radio: 11g_standard
+    mesh_iface: mesh
+
+  # MESH - 5 GHz 802.11s - Snack
+  - vid: 24
+    role: mesh
+    name: mesh_5g_sck
+    prefix: 10.31.98.150/32
+    ipv6_subprefix: -24
+    mesh_ap: hacrafu-casoncelli-snack
+    mesh_radio: 11a_standard
+    mesh_iface: mesh
+
+  # MESH - 2.4 GHz 802.11s - Snack
+  - vid: 25
+    role: mesh
+    name: mesh_2g_sck
+    prefix: 10.31.98.151/32
+    ipv6_subprefix: -25
+    mesh_ap: hacrafu-casoncelli-snack
     mesh_radio: 11g_standard
     mesh_iface: mesh
 
@@ -90,6 +153,7 @@ networks:
       hacrafu-casoncelli: 1  # 153
       hacrafu-casoncelli-ap: 2  # 154
       hacrafu-casoncelli-lite: 3  # 155
+      hacrafu-casoncelli-snack: 4  # 156
 
   # Uplink
   - vid: 50
@@ -109,11 +173,15 @@ networks:
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
+  hacrafu-casoncelli: 44-40
   hacrafu-casoncelli-ap: 36-40
+  hacrafu-casoncelli-snack: 44-40
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
+  hacrafu-casoncelli: 9-20
   hacrafu-casoncelli-ap: 13-20
+  hacrafu-casoncelli-snack: 9-20
 
 # only place this ssh-keys
 ssh_keys:
@@ -123,3 +191,5 @@ ssh_keys:
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHrBKcGS+pyrN4MvRNqg7TPA2EsJ0cDCYLjrDRlTO6k HaCraFu bob@bobgoehler.de
   - comment: Peter
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFIzevq2nqgb0rBAEEcDEkAIu24aTiWIkem3+59a6h10 HaCraFu Petersilie
+  - comment: Flupsy
+    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHG1Y5nkEm3yUIF1nQkbO8G2qHgtAz5b5Os9o5hVjyQZ HaCraFu Flupsy
