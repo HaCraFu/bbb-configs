@@ -22,6 +22,7 @@ hosts:
         uci set network.vlan_24.ports='lan2:t lan3:t lan4:t lan5:t'
         uci set network.vlan_25.ports='lan2:t lan3:t lan4:t lan5:t'
         uci set network.vlan_40.ports='lan2:t lan3:t lan4:u lan5:u'
+        uci set network.vlan_41.ports='lan2:t lan3:t lan4:t lan5:t'
         uci set network.vlan_42.ports='lan2:t lan3:t lan4:t lan5:t'
         uci set network.vlan_50.ports='wan:u'
         uci commit network; reload_config
@@ -44,6 +45,8 @@ hosts:
 ipv6_prefix: "2001:bf7:850:1a00::/56"
 
 # DHCP      10.248.110.192/26
+#  Public   10.248.110.192/27
+#  Private  10.248.110.224/27
 # MESH      10.31.107.216/29
 # MGMT      10.31.155.112/29
 # TUNNEL    10.31.247.254/31
@@ -109,13 +112,25 @@ networks:
     mesh_radio: 11g_standard
     mesh_iface: mesh
 
-  # DHCP
+  # DHCP - public
   - vid: 40
     role: dhcp
     inbound_filtering: true
     enforce_client_isolation: true
-    prefix: 10.248.110.192/26
+    prefix: 10.248.110.192/27
     ipv6_subprefix: 0
+    assignments:
+      hacrafu-pastasciutta: 1
+
+  # DHCP - private
+  - vid: 41
+    role: dhcp
+    name: private
+    inbound_filtering: true
+    enforce_client_isolation: false
+    no_corerouter_dns_record: true
+    prefix: 10.248.110.224/27
+    ipv6_subprefix: 1
     assignments:
       hacrafu-pastasciutta: 1
 
@@ -125,7 +140,7 @@ networks:
     prefix: 10.31.155.112/29
     gateway: 1
     dns: 1
-    ipv6_subprefix: 1
+    ipv6_subprefix: 2
     assignments:
       hacrafu-pastasciutta: 1  # 113
       hacrafu-pastasciutta-yard: 2  # 114
@@ -153,17 +168,17 @@ networks:
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  hacrafu-pastasciutta: 44-40
+  hacrafu-pastasciutta: 36-40
   hacrafu-pastasciutta-yard: 36-40
   hacrafu-pastasciutta-street: 36-40
-  hacrafu-pastasciutta-guest: 44-40
+  hacrafu-pastasciutta-guest: 36-40
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  hacrafu-pastasciutta: 9-20
+  hacrafu-pastasciutta: 13-20
   hacrafu-pastasciutta-yard: 13-20
   hacrafu-pastasciutta-street: 13-20
-  hacrafu-pastasciutta-guest: 9-20
+  hacrafu-pastasciutta-guest: 13-20
 
 # only place this ssh-keys
 ssh_keys:
