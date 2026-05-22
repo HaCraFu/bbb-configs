@@ -117,9 +117,10 @@ networks:
     ipv6_subprefix: 0
     assignments:
       hacrafu-capelvenere: 1  # 33
-      ffpi: 2   # 34
+      ffpi: 2  # 34
       tompi: 3  # 35
-      deb: 4    # 36
+      deb: 4  # 36
+      pi-hacrafu: 5  # 37
 
   # MGMT
   - vid: 42
