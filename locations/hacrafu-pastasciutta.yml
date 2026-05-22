@@ -30,17 +30,17 @@ hosts:
   - hostname: hacrafu-pastasciutta-yard
     role: ap
     model: "cudy_ap3000outdoor-v1"
-    wireless_profile: freifunk_hacrafu
+    wireless_profile: pasta
 
   - hostname: hacrafu-pastasciutta-street
     role: ap
     model: "cudy_ap3000outdoor-v1"
-    wireless_profile: freifunk_hacrafu
+    wireless_profile: pasta
 
   - hostname: hacrafu-pastasciutta-guest
     role: ap
     model: "cudy_wr3000-v1"
-    wireless_profile: freifunk_hacrafu
+    wireless_profile: pasta
 
 ipv6_prefix: "2001:bf7:850:1a00::/56"
 
@@ -179,6 +179,34 @@ location__channel_assignments_11g_standard__to_merge:
   hacrafu-pastasciutta-yard: 13-20
   hacrafu-pastasciutta-street: 13-20
   hacrafu-pastasciutta-guest: 13-20
+
+# Wireless profile
+location__wireless_profiles__to_merge:
+  - name: pasta
+    ifaces:
+      - mode: ap
+        ssid: freifunk.hacrafu.de
+        encryption: none
+        network: dhcp
+        radio: [11a_standard, 11g_standard]
+        ifname_hint: ff
+
+      # AP for VID 41 (PRIVATE)
+      - mode: ap
+        ssid: Katerchen
+        encryption: sae-mixed
+        key: "file:/root/wifi-pwd"
+        network: private
+        radio: [11a_standard, 11g_standard]
+        ifname_hint: pr
+
+      - mode: mesh
+        mesh_id: Mesh-Freifunk-Berlin
+        radio: [11a_standard, 11g_standard, 11a_mesh]
+        mcast_rate: 12000
+        mesh_fwding: 0
+        mesh_nolearn: 1
+        ifname_hint: mesh
 
 # only place this ssh-keys
 ssh_keys:
