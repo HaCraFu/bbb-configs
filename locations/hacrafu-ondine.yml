@@ -1,9 +1,9 @@
 ---
 
 location: hacrafu-ondine
-location_nice: Cafe Seeschloss, Altlandsberger Chaussee 102, 15345 Eggersdorf
-latitude: 52.55753549153633
-longitude: 13.830591953371984
+location_nice: MOL
+# latitude: 52.0
+# longitude: 13.0
 contact_name: "Hacken Craften Funken e.V."
 contact_nickname: "HaCraFu e.V."
 contacts:
@@ -11,17 +11,15 @@ contacts:
 
 hosts:
 
-  - hostname: hacrafu-ondine-core
+  - hostname: hacrafu-ondine
     role: corerouter
-    model: "cudy_x6-v1"
-    openwrt_version: 24.10-SNAPSHOT
+    model: "genexis_pulse-ex400"
     wireless_profile: freifunk_hacrafu
 
 ipv6_prefix: "2001:bf7:850:2b00::/56"
 
-# dhcp    10.248.40.96/27
-# mesh5   10.248.39.168/32
-# mesh2   10.248.39.169/32
+# DHCP    10.248.40.96/27
+# MESH    10.248.39.168/31
 # MGMT    10.248.39.167/32
 # TUNNEL  10.248.39.170/31
 
@@ -33,7 +31,7 @@ networks:
     name: mesh_5g
     prefix: 10.248.39.168/32
     ipv6_subprefix: -20
-    mesh_ap: hacrafu-ondine-core
+    mesh_ap: hacrafu-ondine
     mesh_radio: 11a_standard
     mesh_iface: mesh
 
@@ -43,20 +41,19 @@ networks:
     name: mesh_2g
     prefix: 10.248.39.169/32
     ipv6_subprefix: -21
-    mesh_ap: hacrafu-ondine-core
+    mesh_ap: hacrafu-ondine
     mesh_radio: 11g_standard
     mesh_iface: mesh
 
   # DHCP
   - vid: 40
     role: dhcp
-    untagged: false
     inbound_filtering: true
     enforce_client_isolation: true
     prefix: 10.248.40.96/27
     ipv6_subprefix: 0
     assignments:
-      hacrafu-ondine-core: 1
+      hacrafu-ondine: 1
 
   # MGMT
   - vid: 42
@@ -66,13 +63,11 @@ networks:
     dns: 1
     ipv6_subprefix: 1
     assignments:
-      hacrafu-ondine-core: 1
+      hacrafu-ondine: 1
 
   # UPLINK + TUNNEL
   - vid: 50
-    ifname: wan
     role: uplink
-    untagged: true
 
   - role: tunnel
     ifname: ts_wg0
@@ -88,13 +83,11 @@ networks:
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  hacrafu-ondine-core: 36-80
+  hacrafu-ondine: 36-40
 
 location__channel_assignments_11g_standard__to_merge:
-  hacrafu-ondine-core: 13-40
+  hacrafu-ondine: 13-20
 
 ssh_keys:
   - comment: Tom
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICIpPZouLOf+1WT9ylMa/9mX1dhLTy8W07Q8G5w7KKNz freifunk@hacrafu.de
-  - comment: Bob
-    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHrBKcGS+pyrN4MvRNqg7TPA2EsJ0cDCYLjrDRlTO6k HaCraFu bob@bobgoehler.de
