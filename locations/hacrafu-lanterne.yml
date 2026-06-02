@@ -16,8 +16,8 @@ hosts:
     role: corerouter
     model: "glinet_gl-mt6000"
     wireless_profile: disable
-    openwrt_version: 24.10.6
-    # openwrt_mirror: https://downloads.openwrt.org
+    openwrt_version: 24.10.7
+    openwrt_mirror: https://downloads.openwrt.org
     host__rclocal__to_merge:
       - |
         uci set network.vlan_10.ports='lan2:t'
