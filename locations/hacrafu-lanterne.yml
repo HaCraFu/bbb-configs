@@ -10,7 +10,6 @@ contact_name: "Hacken Craften Funken e.V."
 contact_nickname: "HaCraFu e.V."
 contacts:
   - "freifunk@hacrafu.de"
-  - "https://hacrafu.de/freifunk"
 
 hosts:
   - hostname: hacrafu-lanterne
@@ -18,7 +17,7 @@ hosts:
     model: "glinet_gl-mt6000"
     wireless_profile: disable
     openwrt_version: 24.10.6
-    openwrt_mirror: https://downloads.openwrt.org
+    # openwrt_mirror: https://downloads.openwrt.org
     host__rclocal__to_merge:
       - |
         uci set network.vlan_10.ports='lan2:t'
@@ -40,11 +39,17 @@ hosts:
     role: ap
     model: "cudy_ap3000outdoor-v1"
     wireless_profile: freifunk_hacrafu
+    host__rclocal__to_merge:
+      - |
+        uci set network.vlan_40.ports='eth0:u'
 
   - hostname: hacrafu-lanterne-mesh
     role: ap
     model: "cudy_ap3000outdoor-v1"
     wireless_profile: freifunk_hacrafu
+    host__rclocal__to_merge:
+      - |
+        uci set network.vlan_40.ports='eth0:u'
 
   - hostname: hacrafu-lanterne-indoor
     role: ap
