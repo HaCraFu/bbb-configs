@@ -1,9 +1,9 @@
 ---
 
 location: hacrafu-fregula
-location_nice: srb-3
-latitude: 52.52743
-longitude: 13.78555
+location_nice: Karl-Marx-Straße 11, Kießelbude, 15345 Eggersdorf
+latitude: 52.539454308
+longitude: 13.821079731
 contact_name: "Hacken Craften Funken e.V."
 contact_nickname: "HaCraFu e.V."
 contacts:
@@ -12,12 +12,17 @@ contacts:
 hosts:
   - hostname: hacrafu-fregula
     role: corerouter
-    model: "dlink_dap-x1860-a1"
+    model: "genexis_pulse-ex400"
     wireless_profile: freifunk_hacrafu
+    host__rclocal__to_merge:
+      - |
+        uci set network.vlan_40.ports='lan:u'
+        uci set network.vlan_50.ports='wan:u'
+        uci commit network; reload_config
 
 ipv6_prefix: "2001:bf7:850:3e00::/56"
-# dhcp    10.248.66.32/27
-# mesh    10.31.226.48/31
+# DHCP    10.248.66.32/27
+# MESH    10.31.226.48/31
 # MGMT    10.31.226.41/32
 # TUNNEL  10.31.226.50/31
 
@@ -65,7 +70,6 @@ networks:
   # UPLINK
   - vid: 50
     role: uplink
-    untagged: true
 
   - role: tunnel
     ifname: ts_wg0
@@ -81,11 +85,11 @@ networks:
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  hacrafu-fregula: 36-80
+  hacrafu-fregula: 36-40
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  hacrafu-fregula: 13-40
+  hacrafu-fregula: 13-20
 
 # only place this ssh-keys
 ssh_keys:
@@ -95,3 +99,5 @@ ssh_keys:
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHrBKcGS+pyrN4MvRNqg7TPA2EsJ0cDCYLjrDRlTO6k HaCraFu bob@bobgoehler.de
   - comment: Peter
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFIzevq2nqgb0rBAEEcDEkAIu24aTiWIkem3+59a6h10 HaCraFu Petersilie
+  - comment: Flupsy
+    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHG1Y5nkEm3yUIF1nQkbO8G2qHgtAz5b5Os9o5hVjyQZ HaCraFu Flupsy
