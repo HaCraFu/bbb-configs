@@ -2,8 +2,8 @@
 
 location: hacrafu-risi
 location_nice: Petershagen/Eggersdorf
-# latitude: 52.52379515507462
-# longitude: 13.770276289566052
+# latitude: 52.0
+# longitude: 13.0
 contact_name: "Hacken Craften Funken e.V."
 contact_nickname: "HaCraFu e.V."
 contacts:
@@ -14,6 +14,9 @@ hosts:
     role: corerouter
     model: "cudy_ap3000outdoor-v1"
     wireless_profile: freifunk_hacrafu
+    host__rclocal__to_merge:
+      - |
+        uci set network.vlan_50.ports='eth0:u'
 
 ipv6_prefix: "2001:bf7:850:1f00::/56"
 # DHCP    10.248.21.96/27
@@ -45,7 +48,6 @@ networks:
   # DHCP
   - vid: 40
     role: dhcp
-    untagged: true
     inbound_filtering: true
     enforce_client_isolation: true
     prefix: 10.248.21.96/27
@@ -64,29 +66,28 @@ networks:
       hacrafu-risi: 1
 
   # Uplink
-  #- vid: 50
-  #  role: uplink
-  #  untagged: true
+  - vid: 50
+    role: uplink
 
-  #- role: tunnel
-  #  ifname: ts_wg0
-  #  mtu: 1280
-  #  prefix: 10.248.23.254/32
-  #  wireguard_port: 51820
+  - role: tunnel
+    ifname: ts_wg0
+    mtu: 1280
+    prefix: 10.248.23.254/32
+    wireguard_port: 51820
 
-  #- role: tunnel
-  #  ifname: ts_wg1
-  #  mtu: 1280
-  #  prefix: 10.248.23.255/32
-  #  wireguard_port: 51821
+  - role: tunnel
+    ifname: ts_wg1
+    mtu: 1280
+    prefix: 10.248.23.255/32
+    wireguard_port: 51821
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  hacrafu-risi: 36-80
+  hacrafu-risi: 36-40
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  hacrafu-risi: 13-40
+  hacrafu-risi: 13-20
 
 # only place this ssh-keys
 ssh_keys:
@@ -96,3 +97,5 @@ ssh_keys:
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHrBKcGS+pyrN4MvRNqg7TPA2EsJ0cDCYLjrDRlTO6k HaCraFu bob@bobgoehler.de
   - comment: Peter
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFIzevq2nqgb0rBAEEcDEkAIu24aTiWIkem3+59a6h10 HaCraFu Petersilie
+  - comment: Flupsy
+    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHG1Y5nkEm3yUIF1nQkbO8G2qHgtAz5b5Os9o5hVjyQZ HaCraFu Flupsy
