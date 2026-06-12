@@ -42,6 +42,7 @@ hosts:
     host__rclocal__to_merge:
       - |
         uci set network.vlan_40.ports='eth0:u'
+        uci commit network; reload_config
 
   - hostname: hacrafu-lanterne-mesh
     role: ap
@@ -50,6 +51,7 @@ hosts:
     host__rclocal__to_merge:
       - |
         uci set network.vlan_40.ports='eth0:u'
+        uci commit network; reload_config
 
   - hostname: hacrafu-lanterne-indoor
     role: ap
