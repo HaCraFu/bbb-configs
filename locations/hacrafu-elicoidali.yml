@@ -10,12 +10,10 @@ contacts:
   - "freifunk@hacrafu.de"
 
 hosts:
-
   - hostname: hacrafu-elicoidali
     role: corerouter
     model: "genexis_pulse-ex400"
     wireless_profile: freifunk_hacrafu
-    flow_offload: hw
     host__rclocal__to_merge:
       - |
         uci set network.vlan_40.ports='lan:u'
@@ -24,8 +22,8 @@ hosts:
 
 ipv6_prefix: "2001:bf7:850:4f00::/56"
 
-# dhcp      10.248.27.224/27
-# mesh      10.31.96.252/31
+# DHCP      10.248.27.224/27
+# MESH      10.31.96.252/31
 # MGMT      10.31.44.139/32
 # TUNNEL    10.31.96.254/31
 
@@ -46,7 +44,6 @@ networks:
     name: mesh_2g
     prefix: 10.31.96.253/32
     ipv6_subprefix: -21
-    mesh_metric_lqm: ['default 0.8']
     mesh_ap: hacrafu-elicoidali
     mesh_radio: 11g_standard
     mesh_iface: mesh
@@ -89,11 +86,11 @@ networks:
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  hacrafu-elicoidali: 36-80
+  hacrafu-elicoidali: 36-40
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  hacrafu-elicoidali: 13-40
+  hacrafu-elicoidali: 13-20
 
 # only place this ssh-keys
 ssh_keys:
@@ -103,3 +100,5 @@ ssh_keys:
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHrBKcGS+pyrN4MvRNqg7TPA2EsJ0cDCYLjrDRlTO6k HaCraFu bob@bobgoehler.de
   - comment: Peter
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFIzevq2nqgb0rBAEEcDEkAIu24aTiWIkem3+59a6h10 HaCraFu Petersilie
+  - comment: Flupsy
+    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHG1Y5nkEm3yUIF1nQkbO8G2qHgtAz5b5Os9o5hVjyQZ HaCraFu Flupsy
