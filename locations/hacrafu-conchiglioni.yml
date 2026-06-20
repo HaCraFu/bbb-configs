@@ -68,7 +68,7 @@ networks:
     name: mesh_2g
     prefix: 10.31.233.145/32
     ipv6_subprefix: -21
-    mesh_metric_lqm: ['default 0.8']  # prefer 5 GHz Mesh
+    # mesh_metric_lqm: ['default 0.8']  # prefer 5 GHz Mesh
     mesh_ap: hacrafu-conchiglioni
     mesh_radio: 11g_standard
     mesh_iface: mesh
@@ -158,6 +158,7 @@ networks:
       hacrafu-conchiglioni-swan: 2
       hacrafu-conchiglioni-mill: 3
       hacrafu-conchiglioni-nap: 4
+      hacrafu-conchiglioni-switch: 5
 
   # UPLINK
   - vid: 50
