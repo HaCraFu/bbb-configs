@@ -31,22 +31,21 @@ hosts:
   - hostname: hacrafu-conchiglioni-swan
     role: ap
     model: "tplink_archer-c50-v4"
-    wireless_profile: freifunk_hacrafu_ap_only
+    wireless_profile: freifunk_hacrafu
 
   # Saal-AP: Schlossherrenzimmer
   - hostname: hacrafu-conchiglioni-mill
     role: ap
     model: "tplink_archer-c50-v4"
-    wireless_profile: freifunk_hacrafu_ap_only
+    wireless_profile: freifunk_hacrafu
 
   # Hotel-AP: Schlafzimmer
   - hostname: hacrafu-conchiglioni-nap
     role: ap
     model: "tplink_archer-c50-v4"
-    wireless_profile: freifunk_hacrafu_ap_only
+    wireless_profile: freifunk_hacrafu
 
 ipv6_prefix: "2001:bf7:850:3500::/56"
-
 # DHCP      10.248.47.192/26
 # MESH      10.31.233.144/28
 # MGMT      10.248.86.232/29
@@ -90,7 +89,7 @@ networks:
     name: mesh_2g_swan
     prefix: 10.31.233.147/32
     ipv6_subprefix: -23
-    mesh_metric_lqm: ['default 0.8']  # prefer 5 GHz Mesh
+    # mesh_metric_lqm: ['default 0.8']  # prefer 5 GHz Mesh
     mesh_ap: hacrafu-conchiglioni-swan
     mesh_radio: 11g_standard
     mesh_iface: mesh
@@ -111,7 +110,7 @@ networks:
     name: mesh_2g_mill
     prefix: 10.31.233.149/32
     ipv6_subprefix: -25
-    mesh_metric_lqm: ['default 0.8']  # prefer 5 GHz Mesh
+    # mesh_metric_lqm: ['default 0.8']  # prefer 5 GHz Mesh
     mesh_ap: hacrafu-conchiglioni-mill
     mesh_radio: 11g_standard
     mesh_iface: mesh
@@ -132,7 +131,7 @@ networks:
     name: mesh_2g_nap
     prefix: 10.31.233.151/32
     ipv6_subprefix: -27
-    mesh_metric_lqm: ['default 0.8']  # prefer 5 GHz Mesh
+    # mesh_metric_lqm: ['default 0.8']  # prefer 5 GHz Mesh
     mesh_ap: hacrafu-conchiglioni-nap
     mesh_radio: 11g_standard
     mesh_iface: mesh
@@ -163,6 +162,8 @@ networks:
   # UPLINK
   - vid: 50
     role: uplink
+    igress: 32
+    egress: 32
 
   - role: tunnel
     ifname: ts_wg0
