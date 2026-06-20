@@ -16,14 +16,14 @@ hosts:
     wireless_profile: freifunk_hacrafu
     host__rclocal__to_merge:
       - |
-        uci set network.vlan_22.ports='lan1:t lan2:t lan3:t'
-        uci set network.vlan_23.ports='lan1:t lan2:t lan3:t'
-        uci set network.vlan_24.ports='lan1:t lan2:t lan3:t'
-        uci set network.vlan_25.ports='lan1:t lan2:t lan3:t'
-        uci set network.vlan_26.ports='lan1:t lan2:t lan3:t'
-        uci set network.vlan_27.ports='lan1:t lan2:t lan3:t'
-        uci set network.vlan_40.ports='lan1:u lan2:t lan3:t'
-        uci set network.vlan_42.ports='lan1:t lan2:t lan3:t'
+        # uci set network.vlan_22.ports='wan:t lan1:t lan2:t lan3:t'
+        # uci set network.vlan_23.ports='wan:t lan1:t lan2:t lan3:t'
+        # uci set network.vlan_24.ports='wan:t lan1:t lan2:t lan3:t'
+        # uci set network.vlan_25.ports='wan:t lan1:t lan2:t lan3:t'
+        # uci set network.vlan_26.ports='wan:t lan1:t lan2:t lan3:t'
+        # uci set network.vlan_27.ports='wan:t lan1:t lan2:t lan3:t'
+        uci set network.vlan_40.ports='wan:t lan1:u lan2:t lan3:t'
+        # uci set network.vlan_42.ports='wan:t lan1:t lan2:t lan3:t'
         uci set network.vlan_50.ports='wan:u'
         uci commit network; reload_config
 
