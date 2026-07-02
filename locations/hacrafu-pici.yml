@@ -65,7 +65,7 @@ networks:
     enforce_client_isolation: false
     no_corerouter_dns_record: true
     prefix: 10.31.167.160/27
-    ipv6_subprefix: 1
+    ipv6_subprefix: 2
     assignments:
       hacrafu-pici: 1
 
