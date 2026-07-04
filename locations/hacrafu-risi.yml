@@ -79,8 +79,13 @@ networks:
       hacrafu-risi: 1
 
   # Uplink
-  - vid: 50
-    role: uplink
+  - vid: 51
+    role: wireless_uplink
+    wireless_ssid: "FRITZ!Box 7590 AI"
+    wireless_encryption: psk2             # none, psk2, sae, sae-mixed
+    wireless_key: "file:/root/key"
+    radio: 11g_standard                   # 11g_standard or 11a_standard
+    uplink_gateway: 192.168.1.1
 
   - role: tunnel
     ifname: ts_wg0
@@ -127,8 +132,8 @@ location__channel_assignments_11a_standard__to_merge:
   hacrafu-risi: 36-40
 
 # AP-id, wifi-channel, bandwidth, txpower
-location__channel_assignments_11g_standard__to_merge:
-  hacrafu-risi: 13-20
+# location__channel_assignments_11g_standard__to_merge:
+  # hacrafu-risi: 13-20
 
 # only place this ssh-keys
 ssh_keys:
