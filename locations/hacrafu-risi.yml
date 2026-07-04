@@ -2,8 +2,8 @@
 
 location: hacrafu-risi
 location_nice: Petershagen/Eggersdorf
-# latitude: 52.0
-# longitude: 13.0
+latitude: 52.557862690108
+longitude: 13.830662238774
 contact_name: "Hacken Craften Funken e.V."
 contact_nickname: "HaCraFu e.V."
 contacts:
@@ -13,13 +13,14 @@ hosts:
   - hostname: hacrafu-risi
     role: corerouter
     model: "cudy_ap3000outdoor-v1"
-    wireless_profile: freifunk_hacrafu
+    wireless_profile: beach-disco
     host__rclocal__to_merge:
       - |
         uci set network.vlan_50.ports='eth0:u'
 
 ipv6_prefix: "2001:bf7:850:1f00::/56"
 # DHCP    10.248.21.96/27
+# DHCP    10.31.167.160/27 from cicatelli
 # MESH    10.248.20.161/31
 # MGMT    10.248.20.163/32
 # TUNNEL  10.248.23.254/31
@@ -55,6 +56,18 @@ networks:
     assignments:
       hacrafu-risi: 1
 
+  # DHCP - private
+  - vid: 41
+    role: dhcp
+    name: private
+    inbound_filtering: true
+    enforce_client_isolation: false
+    no_corerouter_dns_record: true
+    prefix: 10.31.167.160/27
+    ipv6_subprefix: 2
+    assignments:
+      hacrafu-risi: 1
+
   # MGMT
   - vid: 42
     role: mgmt
@@ -80,6 +93,34 @@ networks:
     mtu: 1280
     prefix: 10.248.23.255/32
     wireguard_port: 51821
+
+# Wireless profile
+location__wireless_profiles__to_merge:
+  - name: beach-disco
+    ifaces:
+      - mode: ap
+        ssid: freifunk.hacrafu.de
+        encryption: none
+        network: dhcp
+        radio: [11a_standard, 11g_standard]
+        ifname_hint: ff
+
+      # AP for VID 41 (PRIVATE)
+      - mode: ap
+        ssid: Weltenphase
+        encryption: sae-mixed
+        key: "file:/root/wifi-pwd"
+        network: private
+        radio: [11a_standard, 11g_standard]
+        ifname_hint: pr
+
+      - mode: mesh
+        mesh_id: Mesh-Freifunk-Berlin
+        radio: [11a_standard, 11g_standard, 11a_mesh]
+        mcast_rate: 12000
+        mesh_fwding: 0
+        mesh_nolearn: 1
+        ifname_hint: mesh
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
