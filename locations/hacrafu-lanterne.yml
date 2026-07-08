@@ -284,9 +284,9 @@ location__channel_assignments_11g_standard__to_merge:
   # hacrafu-lanterne: 13-20 Enable after all falter neighors have been reconfigured to new channel and width
   # Does not work -> reboots constantly !!
   # hacrafu-lanterne: 13-40
-  hacrafu-lanterne-ap: 9-20
+  hacrafu-lanterne-ap: 6-20
   hacrafu-lanterne-mesh: 13-40
-  hacrafu-lanterne-indoor: 9-20
+  hacrafu-lanterne-indoor: 6-20
 
 # only place this ssh-keys
 ssh_keys:
