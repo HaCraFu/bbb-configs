@@ -10,12 +10,10 @@ contacts:
   - "freifunk@hacrafu.de"
 
 hosts:
-
   - hostname: hacrafu-penne-candela
     role: corerouter
     model: "glinet_gl-mt3000"
     wireless_profile: freifunk_hacrafu
-    openwrt_version: 24.10-SNAPSHOT
     host__rclocal__to_merge:
       - |
         uci set network.vlan_40.ports='eth1:u'
@@ -48,7 +46,6 @@ networks:
     prefix: 10.31.238.237/32
     ipv6_subprefix: -21
     mesh_ap: hacrafu-penne-candela
-    mesh_metric_lqm: ['default 0.8']
     mesh_radio: 11g_standard
     mesh_iface: mesh
 
@@ -90,11 +87,11 @@ networks:
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  hacrafu-penne-candela: 36-80
+  hacrafu-penne-candela: 36-40
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  hacrafu-penne-candela: 13-40
+  hacrafu-penne-candela: 13-20
 
 # only place this ssh-keys
 ssh_keys:
@@ -104,3 +101,5 @@ ssh_keys:
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHrBKcGS+pyrN4MvRNqg7TPA2EsJ0cDCYLjrDRlTO6k HaCraFu bob@bobgoehler.de
   - comment: Peter
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFIzevq2nqgb0rBAEEcDEkAIu24aTiWIkem3+59a6h10 HaCraFu Petersilie
+  - comment: Flupsy
+    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHG1Y5nkEm3yUIF1nQkbO8G2qHgtAz5b5Os9o5hVjyQZ HaCraFu Flupsy
