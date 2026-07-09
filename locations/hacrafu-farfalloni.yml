@@ -2,20 +2,18 @@
 
 location: hacrafu-farfalloni
 location_nice: Petershagen/Eggersdorf
-latitude: 52.52373361539418
-longitude: 13.770435886231253
+# latitude: 52.0
+# longitude: 13.0
 contact_name: "Hacken Craften Funken e.V."
 contact_nickname: "HaCraFu e.V."
 contacts:
   - "freifunk@hacrafu.de"
 
 hosts:
-
   - hostname: hacrafu-farfalloni
     role: corerouter
     model: "glinet_gl-mt3000"
     wireless_profile: freifunk_hacrafu
-    openwrt_version: 24.10-SNAPSHOT
     host__rclocal__to_merge:
       - |
         uci set network.vlan_40.ports='eth1:u'
@@ -89,11 +87,11 @@ networks:
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  hacrafu-farfalloni: 36-80
+  hacrafu-farfalloni: 36-40
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  hacrafu-farfalloni: 13-40
+  hacrafu-farfalloni: 13-20
 
 # only place this ssh-keys
 ssh_keys:
@@ -103,3 +101,5 @@ ssh_keys:
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHrBKcGS+pyrN4MvRNqg7TPA2EsJ0cDCYLjrDRlTO6k HaCraFu bob@bobgoehler.de
   - comment: Peter
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFIzevq2nqgb0rBAEEcDEkAIu24aTiWIkem3+59a6h10 HaCraFu Petersilie
+  - comment: Flupsy
+    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHG1Y5nkEm3yUIF1nQkbO8G2qHgtAz5b5Os9o5hVjyQZ HaCraFu Flupsy
