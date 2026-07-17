@@ -13,7 +13,7 @@ hosts:
   - hostname: hacrafu-midolline
     role: corerouter
     model: "glinet_gl-mt6000"
-    wireless_profile: disable
+    wireless_profile: freifunk_hacrafu
     host__rclocal__to_merge:
       - |
         uci set network.vlan_40.ports='lan1:u lan2:u lan3:u lan4:u lan5:u'
@@ -30,24 +30,24 @@ ipv6_prefix: "2001:bf7:850:6400::/56"
 
 networks:
   # MESH - 5 GHz 802.11s
-  # - vid: 20
-  #   role: mesh
-  #   name: mesh_5g
-  #   prefix: 10.31.23.236/32
-  #   ipv6_subprefix: -20
-  #   mesh_ap: hacrafu-midolline
-  #   mesh_radio: 11a_standard
-  #   mesh_iface: mesh
+  - vid: 20
+    role: mesh
+    name: mesh_5g
+    prefix: 10.31.23.236/32
+    ipv6_subprefix: -20
+    mesh_ap: hacrafu-midolline
+    mesh_radio: 11a_standard
+    mesh_iface: mesh
 
   # MESH - 2.4 GHz 802.11s
-  # - vid: 21
-  #   role: mesh
-  #   name: mesh_2g
-  #   prefix: 10.31.23.237/32
-  #   ipv6_subprefix: -21
-  #   mesh_ap: hacrafu-midolline
-  #   mesh_radio: 11g_standard
-  #   mesh_iface: mesh
+  - vid: 21
+    role: mesh
+    name: mesh_2g
+    prefix: 10.31.23.237/32
+    ipv6_subprefix: -21
+    mesh_ap: hacrafu-midolline
+    mesh_radio: 11g_standard
+    mesh_iface: mesh
 
   # DHCP
   - vid: 40
