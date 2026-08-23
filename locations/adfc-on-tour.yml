@@ -1,25 +1,29 @@
 ---
 
-location: hacrafu-carbonara-1
-location_nice: Petershagen/Eggersdorf # used for event at changing locations
-# latitude: 52.0
-# longitude: 13.0
+location: adfc-on-tour
+location_nice: Wriezen->Strausberg->Fürstenwalde/Spree # used for event at changing locations
+latitude: 52.716608772427634
+longitude: 14.136333167552909
 contact_name: "Hacken Craften Funken e.V."
 contact_nickname: "HaCraFu e.V."
 contacts:
   - "freifunk@hacrafu.de"
 
 hosts:
-  - hostname: hacrafu-carbonara-1
+  - hostname: adfc-on-tour
     role: corerouter
-    model: "tplink_archer-c7-v5"
-    wireless_profile: freifunk_hacrafu
+    model: "cudy_wr3000-v1"
+    wireless_profile: freifunk_adfc
+    host__rclocal__to_merge:
+      - |
+        uci set network.vlan_40.ports='wan:t lan1:u lan2:u lan3:u'
+        uci commit network; reload_config
 
 ipv6_prefix: "2001:bf7:850:5e00::/56"
-
-# DHCP    10.31.252.192/27
+# dhcp    10.248.144.192/26 # adfc-on-tour
 # MESH    10.31.54.204/31
 # MGMT    10.31.52.157/32
+# TUNNEL  10.31.160.156/31
 
 networks:
   # MESH - 5 GHz 802.11s
@@ -28,7 +32,7 @@ networks:
     name: mesh_5g
     prefix: 10.31.54.204/32
     ipv6_subprefix: -20
-    mesh_ap: hacrafu-carbonara-1
+    mesh_ap: adfc-on-tour
     mesh_radio: 11a_standard
     mesh_iface: mesh
 
@@ -38,7 +42,7 @@ networks:
     name: mesh_2g
     prefix: 10.31.54.205/32
     ipv6_subprefix: -21
-    mesh_ap: hacrafu-carbonara-1
+    mesh_ap: adfc-on-tour
     mesh_radio: 11g_standard
     mesh_iface: mesh
 
@@ -47,10 +51,10 @@ networks:
     role: dhcp
     inbound_filtering: true
     enforce_client_isolation: true
-    prefix: 10.31.252.192/27
+    prefix: 10.248.144.192/26
     ipv6_subprefix: 0
     assignments:
-      hacrafu-carbonara-1: 1
+      adfc-on-tour: 1
 
   # MGMT
   - vid: 42
@@ -60,15 +64,31 @@ networks:
     dns: 1
     ipv6_subprefix: 1
     assignments:
-      hacrafu-carbonara-1: 1
+      adfc-on-tour: 1
 
-# AP-id, wifi-channel, bandwidth, txpower
-location__channel_assignments_11a_standard__to_merge:
-  hacrafu-carbonara-1: 36-40
+  - vid: 51
+    role: wireless_uplink
+    wireless_ssid: "ff-uplink"
+    wireless_encryption: psk2
+    wireless_key: "file:/root/key"
+    radio: 11a_standard
+    uplink_gateway: 192.168.43.1
+
+  - role: tunnel
+    ifname: ts_wg0
+    mtu: 1280
+    prefix: 10.31.160.156/32
+    wireguard_port: 51820
+
+  - role: tunnel
+    ifname: ts_wg1
+    mtu: 1280
+    prefix: 10.31.160.157/32
+    wireguard_port: 51821
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  hacrafu-carbonara-1: 13-20
+  adfc-on-tour: 13-20
 
 # only place this ssh-keys
 ssh_keys:
@@ -80,3 +100,20 @@ ssh_keys:
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFIzevq2nqgb0rBAEEcDEkAIu24aTiWIkem3+59a6h10 HaCraFu Petersilie
   - comment: Flupsy
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHG1Y5nkEm3yUIF1nQkbO8G2qHgtAz5b5Os9o5hVjyQZ HaCraFu Flupsy
+
+location__wireless_profiles__to_merge:
+  - name: freifunk_adfc
+    ifaces:
+      - mode: ap
+        ssid: freifunk adfc-on-tour
+        encryption: none
+        network: dhcp
+        radio: [11g_standard]
+        ifname_hint: adfc
+
+      - mode: ap
+        ssid: freifunk.hacrafu.de
+        encryption: none
+        network: dhcp
+        radio: [11g_standard]
+        ifname_hint: ff
