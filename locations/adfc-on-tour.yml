@@ -1,9 +1,10 @@
 ---
 
+# based on carbonara 1
 location: adfc-on-tour
-location_nice: Wriezen->Strausberg->Fürstenwalde/Spree # used for event at changing locations
-latitude: 52.716608772427634
-longitude: 14.136333167552909
+location_nice: Strausberg
+# latitude: 52.0
+# longitude: 14.0
 contact_name: "Hacken Craften Funken e.V."
 contact_nickname: "HaCraFu e.V."
 contacts:
@@ -13,7 +14,7 @@ hosts:
   - hostname: adfc-on-tour
     role: corerouter
     model: "cudy_wr3000-v1"
-    wireless_profile: freifunk_adfc
+    wireless_profile: freifunk_hacrafu
     host__rclocal__to_merge:
       - |
         uci set network.vlan_40.ports='wan:t lan1:u lan2:u lan3:u'
@@ -87,6 +88,10 @@ networks:
     wireguard_port: 51821
 
 # AP-id, wifi-channel, bandwidth, txpower
+location__channel_assignments_11a_standard__to_merge:
+  hacrafu-capelvenere: 36-40
+
+# AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
   adfc-on-tour: 13-20
 
@@ -100,20 +105,3 @@ ssh_keys:
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFIzevq2nqgb0rBAEEcDEkAIu24aTiWIkem3+59a6h10 HaCraFu Petersilie
   - comment: Flupsy
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHG1Y5nkEm3yUIF1nQkbO8G2qHgtAz5b5Os9o5hVjyQZ HaCraFu Flupsy
-
-location__wireless_profiles__to_merge:
-  - name: freifunk_adfc
-    ifaces:
-      - mode: ap
-        ssid: freifunk adfc-on-tour
-        encryption: none
-        network: dhcp
-        radio: [11g_standard]
-        ifname_hint: adfc
-
-      - mode: ap
-        ssid: freifunk.hacrafu.de
-        encryption: none
-        network: dhcp
-        radio: [11g_standard]
-        ifname_hint: ff
