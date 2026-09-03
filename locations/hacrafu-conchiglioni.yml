@@ -24,19 +24,19 @@ hosts:
   - hostname: hacrafu-conchiglioni-swan
     role: ap
     model: "tplink_archer-c50-v4"
-    wireless_profile: freifunk_hacrafu
+    wireless_profile: freifunk_hacrafu_ap_only
 
   # Saal-AP: Schlossherrenzimmer
   - hostname: hacrafu-conchiglioni-mill
     role: ap
     model: "tplink_archer-c50-v4"
-    wireless_profile: freifunk_hacrafu
+    wireless_profile: freifunk_hacrafu_ap_only
 
   # Hotel-AP: Schlafzimmer
   - hostname: hacrafu-conchiglioni-nap
     role: ap
     model: "tplink_archer-c50-v4"
-    wireless_profile: freifunk_hacrafu
+    wireless_profile: freifunk_hacrafu_ap_only
 
 ipv6_prefix: "2001:bf7:850:3500::/56"
 # DHCP      10.248.47.192/26
@@ -66,64 +66,64 @@ networks:
     mesh_iface: mesh
 
   # MESH - 5 GHz 802.11s - AP Swan
-  - vid: 22
-    role: mesh
-    name: mesh_5g_swan
-    prefix: 10.31.233.146/32
-    ipv6_subprefix: -22
-    mesh_ap: hacrafu-conchiglioni-swan
-    mesh_radio: 11a_standard
-    mesh_iface: mesh
+  # - vid: 22
+  #   role: mesh
+  #   name: mesh_5g_swan
+  #   prefix: 10.31.233.146/32
+  #   ipv6_subprefix: -22
+  #   mesh_ap: hacrafu-conchiglioni-swan
+  #   mesh_radio: 11a_standard
+  #   mesh_iface: mesh
 
   # MESH - 2.4 GHz 802.11s - AP Swan
-  - vid: 23
-    role: mesh
-    name: mesh_2g_swan
-    prefix: 10.31.233.147/32
-    ipv6_subprefix: -23
-    mesh_ap: hacrafu-conchiglioni-swan
-    mesh_radio: 11g_standard
-    mesh_iface: mesh
+  # - vid: 23
+  #   role: mesh
+  #   name: mesh_2g_swan
+  #   prefix: 10.31.233.147/32
+  #   ipv6_subprefix: -23
+  #   mesh_ap: hacrafu-conchiglioni-swan
+  #   mesh_radio: 11g_standard
+  #   mesh_iface: mesh
 
   # MESH - 5 GHz 802.11s - AP Mill
-  - vid: 24
-    role: mesh
-    name: mesh_5g_mill
-    prefix: 10.31.233.148/32
-    ipv6_subprefix: -24
-    mesh_ap: hacrafu-conchiglioni-mill
-    mesh_radio: 11a_standard
-    mesh_iface: mesh
+  # - vid: 24
+  #   role: mesh
+  #   name: mesh_5g_mill
+  #   prefix: 10.31.233.148/32
+  #   ipv6_subprefix: -24
+  #   mesh_ap: hacrafu-conchiglioni-mill
+  #   mesh_radio: 11a_standard
+  #   mesh_iface: mesh
 
   # MESH - 2.4 GHz 802.11s - AP Mill
-  - vid: 25
-    role: mesh
-    name: mesh_2g_mill
-    prefix: 10.31.233.149/32
-    ipv6_subprefix: -25
-    mesh_ap: hacrafu-conchiglioni-mill
-    mesh_radio: 11g_standard
-    mesh_iface: mesh
+  # - vid: 25
+  #   role: mesh
+  #   name: mesh_2g_mill
+  #   prefix: 10.31.233.149/32
+  #   ipv6_subprefix: -25
+  #   mesh_ap: hacrafu-conchiglioni-mill
+  #   mesh_radio: 11g_standard
+  #   mesh_iface: mesh
 
   # MESH - 5 GHz 802.11s - AP Nap
-  - vid: 26
-    role: mesh
-    name: mesh_5g_nap
-    prefix: 10.31.233.150/32
-    ipv6_subprefix: -26
-    mesh_ap: hacrafu-conchiglioni-nap
-    mesh_radio: 11a_standard
-    mesh_iface: mesh
+  # - vid: 26
+  #   role: mesh
+  #   name: mesh_5g_nap
+  #   prefix: 10.31.233.150/32
+  #   ipv6_subprefix: -26
+  #   mesh_ap: hacrafu-conchiglioni-nap
+  #   mesh_radio: 11a_standard
+  #   mesh_iface: mesh
 
   # MESH - 2.4 GHz 802.11s - AP Nap
-  - vid: 27
-    role: mesh
-    name: mesh_2g_nap
-    prefix: 10.31.233.151/32
-    ipv6_subprefix: -27
-    mesh_ap: hacrafu-conchiglioni-nap
-    mesh_radio: 11g_standard
-    mesh_iface: mesh
+  # - vid: 27
+  #   role: mesh
+  #   name: mesh_2g_nap
+  #   prefix: 10.31.233.151/32
+  #   ipv6_subprefix: -27
+  #   mesh_ap: hacrafu-conchiglioni-nap
+  #   mesh_radio: 11g_standard
+  #   mesh_iface: mesh
 
   # DHCP
   - vid: 40
@@ -143,17 +143,18 @@ networks:
     dns: 1
     ipv6_subprefix: 1
     assignments:
-      hacrafu-conchiglioni: 1
-      hacrafu-conchiglioni-swan: 2
-      hacrafu-conchiglioni-mill: 3
-      hacrafu-conchiglioni-nap: 4
-      hacrafu-conchiglioni-switch: 5
+      hacrafu-conchiglioni: 1 # 33
+      hacrafu-conchiglioni-swan: 2 # 34
+      hacrafu-conchiglioni-mill: 3 # 35
+      hacrafu-conchiglioni-nap: 4 # 36
+      hacrafu-conchiglioni-sw: 5 # 37
 
   # UPLINK
   - vid: 50
     role: uplink
     ingress: 32
     egress: 32
+    # qos_engine: qosify
 
   - role: tunnel
     ifname: ts_wg0
