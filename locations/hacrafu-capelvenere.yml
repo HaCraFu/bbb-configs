@@ -29,7 +29,7 @@ hosts:
   - hostname: hacrafu-capelvenere-dap
     role: ap
     model: "dlink_dap-x1860-a1"
-    wireless_profile: capelvenere
+    wireless_profile: freifunk_hacrafu
     wifi_roaming: true
 
   - hostname: hacrafu-capelvenere-range
@@ -41,7 +41,7 @@ hosts:
   - hostname: hacrafu-capelvenere-dungeon
     role: ap
     model: "genexis_pulse-ex400"
-    wireless_profile: capelvenere_ap
+    wireless_profile: freifunk_hacrafu
     wifi_roaming: true
 
 ipv6_prefix: "2001:bf7:850:3a00::/56"
@@ -125,6 +125,7 @@ networks:
       tompi: 3 # 35
       deb: 4 # 36
       pi-hacrafu: 5 # 37
+      Anker: 6 # 38
 
   # MGMT
   - vid: 42
@@ -205,7 +206,7 @@ location__wireless_profiles__to_merge:
         encryption: sae-mixed
         key: "file:/root/lab_key"
         network: dhcp
-        radio: [11a_standard, 11g_standard]
+        radio: [11g_standard]
         ifname_hint: lab
 
       - mode: mesh
@@ -238,5 +239,5 @@ location__wireless_profiles__to_merge:
         encryption: sae-mixed
         key: "file:/root/lab_key"
         network: dhcp
-        radio: [11a_standard, 11g_standard]
+        radio: [11g_standard]
         ifname_hint: lab
