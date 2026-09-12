@@ -148,7 +148,7 @@ networks:
       hacrafu-pastasciutta-yard: 2  # 114
       hacrafu-pastasciutta-street: 3  # 115
       hacrafu-pastasciutta-guest: 4  # 116
-      hacrafu-pastasciutta-switch: 5  # 117
+      hacrafu-pastasciutta-sw: 5  # 117
 
   # UPLINK
   - vid: 50
@@ -190,6 +190,14 @@ location__wireless_profiles__to_merge:
         network: dhcp
         radio: [11a_standard, 11g_standard]
         ifname_hint: ff
+
+      - mode: ap
+        ssid: freifunk.hacrafu.de owe
+        encryption: owe
+        network: dhcp
+        radio: [11a_standard, 11g_standard]
+        ifname_hint: ffowe
+        ieee80211w: 2
 
       # AP for VID 41 (PRIVATE)
       - mode: ap
