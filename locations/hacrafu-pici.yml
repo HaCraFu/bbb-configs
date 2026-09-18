@@ -14,10 +14,6 @@ hosts:
     role: corerouter
     model: "cudy_ap3000outdoor-v1"
     wireless_profile: freifunk_hacrafu
-    host__rclocal__to_merge:
-      - |
-        uci set network.vlan_50.ports='eth0:u'
-        uci commit network; reload_config
 
 ipv6_prefix: "2001:bf7:850:4900::/56"
 # DHCP    10.248.80.0/24
@@ -69,6 +65,7 @@ networks:
   # Uplink
   - vid: 50
     role: uplink
+    untagged: true
 
   - role: tunnel
     ifname: ts_wg0
