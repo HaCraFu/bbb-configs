@@ -12,12 +12,14 @@ contacts:
 hosts:
   - hostname: hacrafu-moonshine
     role: corerouter
-    model: "cudy_wr3000-v1"
+    model: "genexis_pulse-ex400"
     wireless_profile: moonshine
     host__rclocal__to_merge:
       - |
-        uci set network.vlan_40.ports='lan1:t lan2:t lan3:u'
-        uci set network.vlan_50.ports='wan:u'
+        uci set network.vlan_40.ports='lan:u wan:u'
+        # uci set network.vlan_40.ports='lan:u'
+        # uci set network.vlan_42.ports='lan:t'
+        # uci set network.vlan_50.ports='wan:u'
         uci commit network; reload_config
 
   - hostname: hacrafu-moonshine-ap-1
@@ -44,6 +46,10 @@ hosts:
     role: ap
     model: "genexis_pulse-ex400"
     wireless_profile: moonshine
+    host__rclocal__to_merge:
+      - |
+        uci set network.vlan_40.ports='lan:u wan:u'
+        uci commit network; reload_config
 
 ipv6_prefix: "2001:bf7:850:1e00::/56"
 # dhcp    10.248.43.0/26
@@ -68,7 +74,6 @@ networks:
     name: mesh_2g
     prefix: 10.248.21.65/32
     ipv6_subprefix: -21
-    # mesh_metric_lqm: ['default 0.8']
     mesh_ap: hacrafu-moonshine
     mesh_radio: 11g_standard
     mesh_iface: mesh
@@ -89,7 +94,6 @@ networks:
     name: mesh_2g_ap_1
     prefix: 10.248.21.67/32
     ipv6_subprefix: -23
-    # mesh_metric_lqm: ['default 0.8']
     mesh_ap: hacrafu-moonshine-ap-1
     mesh_radio: 11g_standard
     mesh_iface: mesh
@@ -110,7 +114,6 @@ networks:
     name: mesh_2g_ap_2
     prefix: 10.248.21.69/32
     ipv6_subprefix: -25
-    # mesh_metric_lqm: ['default 0.8']
     mesh_ap: hacrafu-moonshine-ap-2
     mesh_radio: 11g_standard
     mesh_iface: mesh
@@ -131,7 +134,6 @@ networks:
     name: mesh_2g_ap_3
     prefix: 10.248.21.71/32
     ipv6_subprefix: -27
-    # mesh_metric_lqm: ['default 0.8']
     mesh_ap: hacrafu-moonshine-ap-3
     mesh_radio: 11g_standard
     mesh_iface: mesh
@@ -152,7 +154,6 @@ networks:
     name: mesh_2g_ap_4
     prefix: 10.248.21.73/32
     ipv6_subprefix: -29
-    # mesh_metric_lqm: ['default 0.8']
     mesh_ap: hacrafu-moonshine-ap-4
     mesh_radio: 11g_standard
     mesh_iface: mesh
@@ -173,7 +174,6 @@ networks:
     name: mesh_2g_ap_5
     prefix: 10.248.21.75/32
     ipv6_subprefix: -30
-    # mesh_metric_lqm: ['default 0.8']
     mesh_ap: hacrafu-moonshine-ap-5
     mesh_radio: 11g_standard
     mesh_iface: mesh
@@ -204,8 +204,8 @@ networks:
       hacrafu-moonshine-ap-5: 6  # 86
 
   # Uplink
-  # - vid: 50
-  #   role: uplink
+  - vid: 50
+    role: uplink
 
   # - role: tunnel
   #   ifname: ts_wg0
@@ -221,21 +221,21 @@ networks:
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11a_standard__to_merge:
-  hacrafu-moonshine: 36-80
-  hacrafu-moonshine-ap-1: 36-80
-  hacrafu-moonshine-ap-2: 36-80
-  hacrafu-moonshine-ap-3: 36-80
-  hacrafu-moonshine-ap-4: 36-80
-  hacrafu-moonshine-ap-5: 36-80
+  hacrafu-moonshine: 36-40
+  hacrafu-moonshine-ap-1: 36-40
+  hacrafu-moonshine-ap-2: 36-40
+  hacrafu-moonshine-ap-3: 36-40
+  hacrafu-moonshine-ap-4: 36-40
+  hacrafu-moonshine-ap-5: 36-40
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
-  hacrafu-moonshine: 13-40
-  hacrafu-moonshine-ap-1: 13-40
-  hacrafu-moonshine-ap-2: 13-40
-  hacrafu-moonshine-ap-3: 13-40
-  hacrafu-moonshine-ap-4: 13-40
-  hacrafu-moonshine-ap-5: 13-40
+  hacrafu-moonshine: 13-20
+  hacrafu-moonshine-ap-1: 13-20
+  hacrafu-moonshine-ap-2: 13-20
+  hacrafu-moonshine-ap-3: 13-20
+  hacrafu-moonshine-ap-4: 13-20
+  hacrafu-moonshine-ap-5: 13-20
 
 # only place this ssh-keys
 ssh_keys:
@@ -245,3 +245,24 @@ ssh_keys:
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEHrBKcGS+pyrN4MvRNqg7TPA2EsJ0cDCYLjrDRlTO6k HaCraFu bob@bobgoehler.de
   - comment: Peter
     key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFIzevq2nqgb0rBAEEcDEkAIu24aTiWIkem3+59a6h10 HaCraFu Petersilie
+  - comment: Flupsy
+    key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHG1Y5nkEm3yUIF1nQkbO8G2qHgtAz5b5Os9o5hVjyQZ HaCraFu Flupsy
+
+# Wireless profile
+location__wireless_profiles__to_merge:
+  - name: moonshine
+    ifaces:
+      - mode: ap
+        ssid: moonshine-test
+        encryption: none
+        network: dhcp
+        radio: [11a_standard, 11g_standard]
+        ifname_hint: moon_t
+
+      - mode: ap
+        ssid: moonshine-prod
+        encryption: psk-mixed
+        key: "file:/root/moon_pass"
+        network: dhcp
+        radio: [11a_standard, 11g_standard]
+        ifname_hint: moon_p
