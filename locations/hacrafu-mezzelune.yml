@@ -2,8 +2,8 @@
 
 location: hacrafu-mezzelune
 location_nice: Brandenburg
-# latitude: 52.0
-# longitude: 13.0
+latitude: 52.483195120196 # mining stage area
+longitude: 13.816632628437 # mining stage area
 contact_name: "Hacken Craften Funken e.V."
 contact_nickname: "HaCraFu e.V."
 contacts:
