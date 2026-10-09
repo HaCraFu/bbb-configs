@@ -52,8 +52,6 @@ hosts:
     wireless_profile: moonshine
     host__rclocal__to_merge:
       - |
-        uci set network.vlan_26.ports='lan:t wan:t'
-        uci set network.vlan_27.ports='lan:t wan:t'
         uci set network.vlan_40.ports='lan:u wan:u'
         uci commit network; reload_config
 
