@@ -25,6 +25,10 @@ hosts:
     role: ap
     model: "cudy_wr3000-v1"
     wireless_profile: moonshine
+    host__rclocal__to_merge:
+      - |
+        uci set network.vlan_40.ports='wan:u lan1:u lan2:u lan3:u'
+        uci commit network; reload_config
 
   - hostname: hacrafu-moonshine-ap-2
     role: ap
