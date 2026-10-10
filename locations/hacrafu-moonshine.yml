@@ -16,10 +16,9 @@ hosts:
     wireless_profile: moonshine_mesh
     host__rclocal__to_merge:
       - |
-        uci set network.vlan_40.ports='lan:u wan:u'
-        # uci set network.vlan_40.ports='lan:u'
-        # uci set network.vlan_42.ports='lan:t'
-        # uci set network.vlan_50.ports='wan:u'
+        uci set network.vlan_40.ports='lan:u'
+        uci set network.vlan_42.ports='lan:t'
+        uci set network.vlan_50.ports='wan:u'
         uci commit network; reload_config
 
   - hostname: hacrafu-moonshine-ap-1 # mind. 3 Ports
@@ -62,6 +61,11 @@ hosts:
       - |
         uci set network.vlan_40.ports='lan:u wan:u'
         uci commit network; reload_config
+
+  - hostname: hacrafu-moonshine-ap-6
+    role: ap
+    model: "cudy_ap3000outdoor-v1"
+    wireless_profile: moonshine
 
 ipv6_prefix: "2001:bf7:850:1e00::/56"
 # dhcp    10.248.43.0/26
@@ -246,6 +250,7 @@ networks:
       hacrafu-moonshine-ap-3: 4  # 84
       hacrafu-moonshine-ap-4: 5  # 85
       hacrafu-moonshine-ap-5: 6  # 86
+      hacrafu-moonshine-ap-6: 7  # 87
 
   # Uplink
   - vid: 50
@@ -271,6 +276,7 @@ location__channel_assignments_11a_standard__to_merge:
   hacrafu-moonshine-ap-3: 36-40
   hacrafu-moonshine-ap-4: 36-40
   hacrafu-moonshine-ap-5: 36-40
+  hacrafu-moonshine-ap-6: 36-40
 
 # AP-id, wifi-channel, bandwidth, txpower
 location__channel_assignments_11g_standard__to_merge:
@@ -280,6 +286,7 @@ location__channel_assignments_11g_standard__to_merge:
   hacrafu-moonshine-ap-3: 13-20
   hacrafu-moonshine-ap-4: 13-20
   hacrafu-moonshine-ap-5: 13-20
+  hacrafu-moonshine-ap-6: 13-20
 
 # only place this ssh-keys
 ssh_keys:
