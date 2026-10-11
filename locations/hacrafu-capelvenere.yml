@@ -13,7 +13,7 @@ hosts:
   - hostname: hacrafu-capelvenere
     role: corerouter
     model: "cudy_wr3000h-v1"
-    wireless_profile: freifunk_hacrafu
+    wireless_profile: capelvenere
     wifi_roaming: true
     host__rclocal__to_merge:
       - |
