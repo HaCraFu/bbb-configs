@@ -13,7 +13,7 @@ hosts:
   - hostname: hacrafu-moonshine
     role: corerouter
     model: "genexis_pulse-ex400"
-    wireless_profile: moonshine_mesh
+    wireless_profile: moonshine
     host__rclocal__to_merge:
       - |
         uci set network.vlan_40.ports='lan:u'
@@ -60,7 +60,7 @@ hosts:
   - hostname: hacrafu-moonshine-ap-5
     role: ap
     model: "genexis_pulse-ex400"
-    wireless_profile: moonshine
+    wireless_profile: moonshine_mesh
     host__rclocal__to_merge:
       - |
         uci set network.vlan_40.ports='lan:u wan:u'
@@ -68,8 +68,12 @@ hosts:
 
   - hostname: hacrafu-moonshine-ap-6
     role: ap
-    model: "cudy_ap3000outdoor-v1"
-    wireless_profile: moonshine
+    model: "dlink_dap-x1860-a1"
+    wireless_profile: moonshine_mesh
+    host__rclocal__to_merge:
+      - |
+        uci set network.vlan_40.ports='lan:u'
+        uci commit network; reload_config
 
 ipv6_prefix: "2001:bf7:850:1e00::/56"
 # dhcp    10.248.43.0/26
@@ -95,6 +99,46 @@ networks:
     prefix: 10.248.21.65/32
     ipv6_subprefix: -21
     mesh_ap: hacrafu-moonshine
+    mesh_radio: 11g_standard
+    mesh_iface: mesh
+
+  # MESH - 5 GHz 802.11s - AP-5
+  - vid: 22
+    role: mesh
+    name: mesh_5g_ap_5
+    prefix: 10.248.21.66/32
+    ipv6_subprefix: -22
+    mesh_ap: hacrafu-moonshine-ap-5
+    mesh_radio: 11a_standard
+    mesh_iface: mesh
+
+  # MESH - 2.4 GHz 802.11s - AP-5
+  - vid: 23
+    role: mesh
+    name: mesh_2g_ap_5
+    prefix: 10.248.21.67/32
+    ipv6_subprefix: -23
+    mesh_ap: hacrafu-moonshine-ap-5
+    mesh_radio: 11g_standard
+    mesh_iface: mesh
+
+  # MESH - 5 GHz 802.11s - AP-6
+  - vid: 24
+    role: mesh
+    name: mesh_5g_ap_6
+    prefix: 10.248.21.68/32
+    ipv6_subprefix: -24
+    mesh_ap: hacrafu-moonshine-ap-6
+    mesh_radio: 11a_standard
+    mesh_iface: mesh
+
+  # MESH - 2.4 GHz 802.11s - AP-6
+  - vid: 25
+    role: mesh
+    name: mesh_2g_ap_6
+    prefix: 10.248.21.69/32
+    ipv6_subprefix: -25
+    mesh_ap: hacrafu-moonshine-ap-6
     mesh_radio: 11g_standard
     mesh_iface: mesh
 
