@@ -2,8 +2,8 @@
 
 location: hacrafu-moonshine
 location_nice: Petershagen/Eggersdorf
-# latitude: 52.558338
-# longitude: 13.827825
+latitude: 52.558207675
+longitude: 13.829786181
 contact_name: "Hacken Craften Funken e.V."
 contact_nickname: "HaCraFu e.V."
 contacts:
@@ -251,12 +251,12 @@ ssh_keys:
 location__wireless_profiles__to_merge:
   - name: moonshine
     ifaces:
-      - mode: ap
-        ssid: moonshine-test
-        encryption: none
-        network: dhcp
-        radio: [11a_standard, 11g_standard]
-        ifname_hint: moon_t
+      # - mode: ap
+      #   ssid: moonshine-test
+      #   encryption: none
+      #   network: dhcp
+      #   radio: [11a_standard, 11g_standard]
+      #   ifname_hint: moon_t
 
       - mode: ap
         ssid: moonshine-prod
@@ -268,12 +268,12 @@ location__wireless_profiles__to_merge:
 
   - name: moonshine_mesh
     ifaces:
-      - mode: ap
-        ssid: moonshine-test
-        encryption: none
-        network: dhcp
-        radio: [11a_standard, 11g_standard]
-        ifname_hint: moon_t
+      # - mode: ap
+      #   ssid: moonshine-test
+      #   encryption: none
+      #   network: dhcp
+      #   radio: [11a_standard, 11g_standard]
+      #   ifname_hint: moon_t
 
       - mode: ap
         ssid: moonshine-prod
