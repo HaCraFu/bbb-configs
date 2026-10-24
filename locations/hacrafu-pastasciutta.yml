@@ -115,7 +115,7 @@ networks:
   # DHCP - public
   - vid: 40
     role: dhcp
-    igress: 50
+    ingress: 50
     egress: 10
     inbound_filtering: true
     enforce_client_isolation: true
