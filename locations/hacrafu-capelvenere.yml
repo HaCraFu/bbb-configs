@@ -25,6 +25,8 @@ hosts:
         uci set network.vlan_42.ports='lan1:t lan2:t lan3:t lan4:t'
         uci set network.vlan_50.ports='wan:u'
         uci commit network; reload_config
+    host__packages__to_merge:
+      - btop
 
   - hostname: hacrafu-capelvenere-dap
     role: ap
