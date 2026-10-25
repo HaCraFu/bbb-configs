@@ -27,6 +27,7 @@ hosts:
         uci commit network; reload_config
     host__packages__to_merge:
       - btop
+      - curl
 
   - hostname: hacrafu-capelvenere-dap
     role: ap
