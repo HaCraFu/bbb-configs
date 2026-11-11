@@ -44,7 +44,7 @@ hosts:
   - hostname: hacrafu-capelvenere-dungeon
     role: ap
     model: "genexis_pulse-ex400"
-    wireless_profile: freifunk_hacrafu
+    wireless_profile: freifunk_hacrafu_ap_only
     wifi_roaming: true
 
 ipv6_prefix: "2001:bf7:850:3a00::/56"
