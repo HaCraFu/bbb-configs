@@ -14,6 +14,7 @@ hosts:
     role: corerouter
     model: "cudy_wr3000-v1"
     wireless_profile: freifunk_hacrafu
+    openwrt_version: 25.12-SNAPSHOT
     host__rclocal__to_merge:
       - |
         uci set network.vlan_40.ports='wan:t lan1:u lan2:t lan3:t'
@@ -25,18 +26,21 @@ hosts:
     role: ap
     model: "tplink_archer-c50-v4"
     wireless_profile: freifunk_hacrafu
+    openwrt_version: 25.12-SNAPSHOT
 
   # Saal-AP: Schlossherrenzimmer
   - hostname: hacrafu-conchiglioni-mill
     role: ap
     model: "tplink_archer-c50-v4"
     wireless_profile: freifunk_hacrafu
+    openwrt_version: 25.12-SNAPSHOT
 
   # Hotel-AP: Schlafzimmer
   - hostname: hacrafu-conchiglioni-nap
     role: ap
     model: "tplink_archer-c50-v4"
     wireless_profile: freifunk_hacrafu
+    openwrt_version: 25.12-SNAPSHOT
 
 ipv6_prefix: "2001:bf7:850:3500::/56"
 # DHCP      10.248.47.192/26
