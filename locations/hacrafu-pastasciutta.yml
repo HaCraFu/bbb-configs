@@ -45,8 +45,6 @@ hosts:
 ipv6_prefix: "2001:bf7:850:1a00::/56"
 
 # DHCP      10.248.110.192/26
-#  Public   10.248.110.192/27
-#  Private  10.248.110.224/27
 # MESH      10.31.107.216/29
 # MGMT      10.31.155.112/29
 # TUNNEL    10.31.247.254/31
@@ -119,7 +117,7 @@ networks:
     egress: 10
     inbound_filtering: true
     enforce_client_isolation: true
-    prefix: 10.248.110.192/27
+    prefix: 10.248.110.192/26
     ipv6_subprefix: 0
     assignments:
       hacrafu-pastasciutta: 1
@@ -131,7 +129,8 @@ networks:
     inbound_filtering: true
     enforce_client_isolation: false
     no_corerouter_dns_record: true
-    prefix: 10.248.110.224/27
+    prefix: 192.168.0.0/24
+    nat: true
     ipv6_subprefix: 1
     assignments:
       hacrafu-pastasciutta: 1
