@@ -129,10 +129,10 @@ networks:
       deb: 4 # 36
       pi-hacrafu: 5 # 37
 
-  # Private DHCP
+  # Private DHCP - Lap
   - vid: 41
     role: dhcp
-    name: prdhcp
+    name: priv
     inbound_filtering: true
     enforce_client_isolation: false
     prefix: 192.168.0.0/24
@@ -140,7 +140,8 @@ networks:
     dhcp_start: 32
     ipv6_subprefix: 1
     assignments:
-      shelly-3em: 1
+      hacrafu-capelvenere: 1
+      shelly-3em: 2
       Anker: 16
 
   # MGMT
@@ -221,7 +222,7 @@ location__wireless_profiles__to_merge:
         ssid: lab
         encryption: sae-mixed
         key: "file:/root/lab_key"
-        network: prdhcp
+        network: priv
         radio: [11g_standard]
         ifname_hint: lab
 
@@ -254,6 +255,6 @@ location__wireless_profiles__to_merge:
         ssid: lab
         encryption: sae-mixed
         key: "file:/root/lab_key"
-        network: prdhcp
+        network: priv
         radio: [11g_standard]
         ifname_hint: lab
